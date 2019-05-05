@@ -34,10 +34,16 @@ public class List<T> implements Iterable<T> {
 
 	public void prepend(T value) {
 		head = new Node<>(value, head);
+		size++;
 	}
 
 	public void append(T value) {
-		head.jump(size - 1).next = new Node<>(value);
+		if (size == 0) {
+			head = new Node<>(value);
+		} else {
+			head.jump(size - 1).next = new Node<>(value);
+		}
+		size++;
 	}
 
 	public void remove(int index) {
@@ -58,6 +64,41 @@ public class List<T> implements Iterable<T> {
 		return size;
 	}
 
+	public boolean contains(T value) {
+		Node<T> app = head;
+		while (app != null) {
+			if (app.value == value) {
+				return true;
+			}
+			app = app.next;
+		}
+		return false;
+	}
+
+	public List<T> createReversed() {
+		List<T> result = new List<>();
+		for (T item : this) {
+			result.prepend(item);
+		}
+		return result;
+	}
+
+	public void reverse() {
+		if (size >= 2) {
+			Node<T> to_empty = head.next;
+			Node<T> reversed = head;
+			reversed.next = null;
+			Node<T> tmp;
+			while (to_empty != null) {
+				tmp = to_empty;
+				to_empty = to_empty.next;
+				tmp.next = reversed;
+				reversed = tmp;
+			}
+			head = reversed;
+		}
+	}
+
 	public String toString() {
 		if (size == 0) {
 			return "[]";
@@ -72,25 +113,6 @@ public class List<T> implements Iterable<T> {
 		result.append(app.value);
 		result.append("]");
 		return result.toString();
-	}
-
-	public boolean contains(T value) {
-		Node<T> app = head;
-		while (app != null) {
-			if (app.value == value) {
-				return true;
-			}
-			app = app.next;
-		}
-		return false;
-	}
-
-	public List<T> reverse() {
-		List<T> result = new List<>();
-		for (T item : this) {
-			result.prepend(item);
-		}
-		return result;
 	}
 
 	public Iterator<T> iterator() {

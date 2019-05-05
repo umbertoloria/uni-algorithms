@@ -70,7 +70,7 @@ public class Graph<T> {
 
 					explored.append(elem);
 
-					for (T adjacent : adjacents(elem).reverse()) {
+					for (T adjacent : adjacents(elem).createReversed()) {
 						pila.push(new Pair<>(adjacent, index + 1));
 					}
 

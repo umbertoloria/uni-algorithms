@@ -24,7 +24,6 @@ public class Set<T extends Comparable<T>> implements Iterable<T> {
 			data[i] = data[--i];
 		}
 		data[i] = value;
-		print(data);
 	}
 
 	/**
@@ -38,7 +37,6 @@ public class Set<T extends Comparable<T>> implements Iterable<T> {
 				data[i] = data[i + 1];
 			}
 		}
-		print(data);
 	}
 
 	public boolean contains(T value) {
@@ -63,12 +61,18 @@ public class Set<T extends Comparable<T>> implements Iterable<T> {
 		return -1;
 	}
 
-	private void print(Object[] lengths) {
-		System.out.print("|");
-		for (int i = 0; i < size; i++) {
-			System.out.printf(" %-2s|", lengths[i]);
+	public String toString() {
+		if (size == 0) {
+			return "[]";
 		}
-		System.out.println();
+		StringBuilder res = new StringBuilder("[");
+		for (int i = 0; i < size - 1; i++) {
+			res.append(data[i]);
+			res.append(", ");
+		}
+		res.append(data[size - 1]);
+		res.append("]");
+		return res.toString();
 	}
 
 	public Iterator<T> iterator() {

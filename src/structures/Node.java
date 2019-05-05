@@ -22,4 +22,8 @@ class Node<T> {
 		return result;
 	}
 
+	public String toString() {
+		return value.toString();
+	}
+
 }

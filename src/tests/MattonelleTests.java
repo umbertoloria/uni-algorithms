@@ -9,7 +9,7 @@ public class MattonelleTests {
 		a.add(7);
 		a.add(10);
 		a.add(2);
-		for (int i = 8; i <= 2000; i++) {
+		for (int i = 1; i <= 50; i++) {
 			System.out.println("n " + i + ": " + a.copri(i));
 		}
 	}
