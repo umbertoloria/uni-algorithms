@@ -1,9 +1,9 @@
 package structures;
 
+@SuppressWarnings("unchecked")
 public class HashTable<K, V> {
 
 	private static final int MINCAPACITY = 4;
-	@SuppressWarnings("unchecked")
 	private Node<Pair<K, V>>[] data = new Node[MINCAPACITY];
 	private int size = 0;
 
@@ -28,12 +28,11 @@ public class HashTable<K, V> {
 		ensureCapacity();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void ensureCapacity() {
 		if ((float) size / data.length > 0.7) {
 			Node<Pair<K, V>>[] tmp = data;
 			size = 0;
-			data = new Node[data.length*2];
+			data = new Node[data.length * 2];
 			for (Node<Pair<K, V>> sublist : tmp) {
 				while (sublist != null) {
 					put(sublist.value.first, sublist.value.second);

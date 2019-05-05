@@ -1,5 +1,6 @@
 package sorting;
 
+@SuppressWarnings("unchecked")
 public class MergeSort {
 
 	public static <T extends Comparable<T>> void mergesort(T[] vect) {
@@ -21,7 +22,6 @@ public class MergeSort {
 	/**
 	 Complexity: time O(n), space O(n)
 	 */
-	@SuppressWarnings("unchecked")
 	private static <T extends Comparable<T>> void merge(T[] vect, int left, int mid, int right) {
 
 		int i = left;
