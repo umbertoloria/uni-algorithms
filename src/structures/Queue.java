@@ -1,6 +1,9 @@
 package structures;
 
-public class Queue<T> {
+import java.util.Collections;
+import java.util.Iterator;
+
+public class Queue<T> implements Iterable<T> {
 
 	private Node<T> head, tail;
 	private int size = 0;
@@ -37,6 +40,14 @@ public class Queue<T> {
 
 	public int size() {
 		return size;
+	}
+
+	public Iterator<T> iterator() {
+		if (head != null) {
+			return head.createIterator();
+		} else {
+			return Collections.emptyIterator();
+		}
 	}
 
 }

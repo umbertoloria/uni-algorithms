@@ -1,6 +1,9 @@
 package structures;
 
-public class Stack<T> {
+import java.util.Collections;
+import java.util.Iterator;
+
+public class Stack<T> implements Iterable<T> {
 
 	private Node<T> first;
 	private int size = 0;
@@ -30,6 +33,14 @@ public class Stack<T> {
 
 	public int size() {
 		return size;
+	}
+
+	public Iterator<T> iterator() {
+		if (first != null) {
+			return first.createIterator();
+		} else {
+			return Collections.emptyIterator();
+		}
 	}
 
 }

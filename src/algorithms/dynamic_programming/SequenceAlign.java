@@ -14,7 +14,7 @@ public class SequenceAlign {
 	}
 
 	/**
-	 Complexity: time O(nm), space O(nm)
+	 Complexity: time and space O(nm)
 	 */
 	public int distance(String a, String b) {
 		int[][] m = new int[a.length() + 1][b.length() + 1];
@@ -79,24 +79,7 @@ public class SequenceAlign {
 	}
 
 	public void printTable() {
-		int cols = lastComputation[0].length;
-		System.out.print("+");
-		for (int i = 0; i < cols; i++) {
-			System.out.print("----");
-		}
-		System.out.println("+");
-		for (int[] row : lastComputation) {
-			System.out.print("|");
-			for (int col : row) {
-				System.out.printf(" %-2d ", col);
-			}
-			System.out.println("|");
-		}
-		System.out.print("+");
-		for (int i = 0; i < cols; i++) {
-			System.out.print("----");
-		}
-		System.out.println("+");
+		Utils.printTable(lastComputation);
 	}
 
 	private static boolean vocale(char c) {

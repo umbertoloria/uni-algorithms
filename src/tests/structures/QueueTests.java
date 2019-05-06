@@ -1,4 +1,4 @@
-package tests;
+package tests.structures;
 
 import structures.Queue;
 
@@ -11,6 +11,11 @@ public class QueueTests {
 		coda.push(3);
 		coda.push(2);
 		coda.push(1);
+		System.out.println("Through iterator.");
+		for (Integer x : coda) {
+			System.out.println(x);
+		}
+		System.out.println("Through functions.");
 		Integer a = coda.pop();
 		while (a != null) {
 			System.out.println(a);

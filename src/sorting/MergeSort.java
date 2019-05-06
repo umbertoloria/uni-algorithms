@@ -20,7 +20,7 @@ public class MergeSort {
 	}
 
 	/**
-	 Complexity: time O(n), space O(n)
+	 Complexity: time and space O(n)
 	 */
 	private static <T extends Comparable<T>> void merge(T[] vect, int left, int mid, int right) {
 

@@ -1,7 +1,5 @@
 package structures;
 
-import java.util.ArrayList;
-
 public class BSTree<T extends Comparable<T>> {
 
 	private BSNode<T> root;
@@ -35,7 +33,7 @@ public class BSTree<T extends Comparable<T>> {
 	}
 
 	public void show() {
-		ArrayList<Object[]> lls = root.positionInfo(1);
+		List<Object[]> lls = root.positionInfo(1);
 		int mm = (int) lls.get(0)[0];
 		for (Object[] a : lls) {
 			mm = Math.max(mm, (int) a[0]);

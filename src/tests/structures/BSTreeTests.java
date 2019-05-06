@@ -1,4 +1,4 @@
-package tests;
+package tests.structures;
 
 import structures.BSTree;
 

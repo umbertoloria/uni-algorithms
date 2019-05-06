@@ -1,15 +1,15 @@
-package tests;
+package tests.sorting;
 
-import sorting.QuickSort;
+import sorting.MergeSort;
 
-public class QuickSortUsage {
+public class MergeSortUsage {
 
 	public static void main(String[] args) {
-		Integer[] a = {
-				6, 3, 2, 10, -3, 5, 1, 4, 5, 3, 2, 6, 4, 1, 3, 7
+		String[] a = {
+				"Umberto", "Mario", "Antonio", "Serena", "Antonella", "Sara"
 		};
 		print(a);
-		QuickSort.quicksort(a, 0, a.length - 1);
+		MergeSort.mergesort(a);
 		print(a);
 	}
 

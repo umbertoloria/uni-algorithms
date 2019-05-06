@@ -1,7 +1,5 @@
 package structures;
 
-import java.util.ArrayList;
-
 public class BSNode<T extends Comparable<T>> {
 
 	private T value;
@@ -89,14 +87,14 @@ public class BSNode<T extends Comparable<T>> {
 		return n.value;
 	}
 
-	ArrayList<Object[]> positionInfo(int level) {
-		ArrayList<Object[]> result = new ArrayList<>();
+	List<Object[]> positionInfo(int level) {
+		List<Object[]> result = new List<>();
 		if (left != null) {
-			result.addAll(left.positionInfo(level + 1));
+			result.expand(left.positionInfo(level + 1));
 		}
-		result.add(new Object[]{level, value});
+		result.append(new Object[]{level, value});
 		if (right != null) {
-			result.addAll(right.positionInfo(level + 1));
+			result.expand(right.positionInfo(level + 1));
 		}
 		return result;
 	}

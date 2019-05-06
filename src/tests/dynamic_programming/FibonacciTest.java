@@ -1,4 +1,4 @@
-package tests;
+package tests.dynamic_programming;
 
 import algorithms.dynamic_programming.Fibonacci;
 

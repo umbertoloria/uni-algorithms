@@ -1,6 +1,6 @@
 package structures;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class List<T> implements Iterable<T> {
@@ -44,6 +44,25 @@ public class List<T> implements Iterable<T> {
 			head.jump(size - 1).next = new Node<>(value);
 		}
 		size++;
+	}
+
+	public void expand(List<T> external) {
+		if (external.size() > 0) {
+			Node<T> tail;
+			Node<T> app = external.head;
+			if (size == 0) {
+				head = new Node<>(external.head.value);
+				app = app.next;
+				size++;
+			}
+			tail = head.jump(size - 1);
+			while (app != null) {
+				tail.next = new Node<>(app.value);
+				app = app.next;
+				tail = tail.next;
+				size++;
+			}
+		}
 	}
 
 	public void remove(int index) {
@@ -116,13 +135,19 @@ public class List<T> implements Iterable<T> {
 	}
 
 	public Iterator<T> iterator() {
-		ArrayList<T> result = new ArrayList<>();
-		Node<T> app = head;
-		while (app != null) {
-			result.add(app.value);
-			app = app.next;
+		if (head != null) {
+			return head.createIterator();
+		} else {
+			return Collections.emptyIterator();
 		}
-		return result.iterator();
+	}
+
+	public T[] toArray(T[] a) {
+		if (a != null) {
+			return head.toArray(a);
+		} else {
+			return null;
+		}
 	}
 
 }
