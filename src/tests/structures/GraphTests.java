@@ -40,6 +40,19 @@ public class GraphTests {
 		g.bfs(1);
 		System.out.println();
 
+		if (g.exists(8)) {
+			System.out.println("8 node exists");
+		}
+
+		if (g.linked(5, 6)) {
+			System.out.println("5-6 link exists");
+		}
+
+		System.out.print("Adjacent with 7:");
+		for (Integer adjacent : g.adjacents(7)) {
+			System.out.print(" " + adjacent);
+		}
+
 	}
 
 }

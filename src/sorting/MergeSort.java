@@ -23,12 +23,10 @@ public class MergeSort {
 	 Complexity: time and space O(n)
 	 */
 	private static <T extends Comparable<T>> void merge(T[] vect, int left, int mid, int right) {
-
 		int i = left;
 		int j = mid + 1;
 		int k = 0;
 		Object[] tmp = new Object[right - left + 1];
-
 		while (i <= mid && j <= right) {
 			if (vect[i].compareTo(vect[j]) < 0) {
 				tmp[k] = vect[i++];

@@ -21,6 +21,13 @@ public class QueueTests {
 			System.out.println(a);
 			a = coda.pop();
 		}
+		if (coda.empty()) {
+			System.out.println("Now it's empty");
+		}
+		System.out.println("Inserted 7");
+		coda.push(7);
+		System.out.println("Its size is " + coda.size());
+		System.out.println("Peeked " + coda.peek());
 	}
 
 }

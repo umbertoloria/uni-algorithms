@@ -19,6 +19,13 @@ public class StackTests {
 		for (Integer i = pila.pop(); i != null; i = pila.pop()) {
 			System.out.println(i);
 		}
+		if (pila.empty()) {
+			System.out.println("Now it's empty");
+		}
+		System.out.println("Inserted 40");
+		pila.push(40);
+		System.out.println("Topped " + pila.top());
+		System.out.println("Its size is " + pila.size());
 	}
 
 }

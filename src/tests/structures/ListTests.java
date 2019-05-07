@@ -30,6 +30,16 @@ public class ListTests {
 		System.out.println("list c        : " + c);
 		c.expand(b);
 		System.out.println("c expand frm b: " + c);
+		c.prepend(7);
+		System.out.println("c prepend 7   : " + c);
+		if (c.contains(7)) {
+			System.out.println("c contains 7");
+		}
+		List<Integer> r = c.createReversed();
+		System.out.println("r crt_rvr c   : " + r);
+		if (c.contains(7)) {
+			System.out.println("r contains 7");
+		}
 	}
 
 }

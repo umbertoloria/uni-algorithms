@@ -143,7 +143,9 @@ public class List<T> implements Iterable<T> {
 	}
 
 	public T[] toArray(T[] a) {
-		if (a != null) {
+		if (head == null) {
+			return null;
+		} else if (a != null) {
 			return head.toArray(a);
 		} else {
 			return null;
