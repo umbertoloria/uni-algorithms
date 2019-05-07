@@ -13,12 +13,12 @@ public class ZainoTests {
 		z1.add(new Oggetto("Braccialetto", 18, 5));
 		z1.add(new Oggetto("Portachiavi", 1, 1));
 		System.out.println("Valore massimo: " + z1.ruba(11));
+		z1.printTable();
 		Oggetto[] oggetti = z1.analisi();
 		for (Oggetto oggetto : oggetti) {
 			System.out.println(oggetto.name + " di valore " + oggetto.value + " e di peso " + oggetto.weight);
 		}
 		System.out.println();
-
 
 		Zaino z2 = new Zaino();
 		z2.add(new Oggetto("1", 12, 5));
@@ -28,10 +28,10 @@ public class ZainoTests {
 		z2.add(new Oggetto("5", 18, 9));
 		System.out.println("Valore massimo: " + z2.ruba(16));
 		oggetti = z2.analisi();
+		z2.printTable();
 		for (Oggetto oggetto : oggetti) {
 			System.out.println(oggetto.name + " di valore " + oggetto.value + " e di peso " + oggetto.weight);
 		}
-		System.out.println();
 	}
 
 }

@@ -79,7 +79,17 @@ public class SequenceAlign {
 	}
 
 	public void printTable() {
-		Utils.printTable(lastComputation);
+		String[] aChars = new String[lastA.length() + 1];
+		aChars[0] = "";
+		for (int i = 0; i < lastA.length(); i++) {
+			aChars[i + 1] = lastA.charAt(i) + "";
+		}
+		String[] bChars = new String[lastB.length() + 1];
+		bChars[0] = "";
+		for (int i = 0; i < lastB.length(); i++) {
+			bChars[i + 1] = lastB.charAt(i) + "";
+		}
+		Utils.printTable(lastComputation, aChars, bChars);
 	}
 
 	private static boolean vocale(char c) {

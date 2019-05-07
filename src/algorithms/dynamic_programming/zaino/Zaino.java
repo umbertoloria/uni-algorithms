@@ -39,14 +39,23 @@ public class Zaino {
 	}
 
 	public void printTable() {
-		Utils.printTable(lastComputation);
+		String[] oggettiNames = new String[oggetti.size() + 1];
+		oggettiNames[0] = "";
+		for (int i = 0; i < oggetti.size(); i++) {
+			oggettiNames[i + 1] = oggetti.get(i).name;
+		}
+		String[] pesiNames = new String[lastComputation[0].length];
+		for (int i = 0; i < pesiNames.length; i++) {
+			pesiNames[i] = i + "";
+		}
+		Utils.printTable(lastComputation, oggettiNames, pesiNames);
 	}
 
 	public Oggetto[] analisi() {
 		List<Oggetto> result = new List<>();
 		int w = lastComputation[0].length - 1;
 		int i = lastComputation.length - 1;
-		while (w > 0) {
+		while (lastComputation[i][w] > 0) {
 			if (lastComputation[i][w] != lastComputation[i - 1][w]) {
 				Oggetto oggetto = oggetti.get(i - 1);
 				result.append(oggetto);
