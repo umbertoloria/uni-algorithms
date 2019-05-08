@@ -44,7 +44,7 @@ public class Set<T extends Comparable<T>> implements Iterable<T> {
 	}
 
 	/**
-	 Complexity: time O(logn)
+	 Complexity: time O(log n)
 	 */
 	private int contains(T value, int inf, int sup) {
 		if (inf <= sup) {
