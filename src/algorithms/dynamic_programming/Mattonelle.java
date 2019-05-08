@@ -2,6 +2,22 @@ package algorithms.dynamic_programming;
 
 import structures.Set;
 
+///////////////////////////////////////////////////////////////////////
+//    Problema delle mattonelle                                      //
+///////////////////////////////////////////////////////////////////////
+//                                                                   //
+//    MATT(i) = {                                                    //
+//                   0,                                if i = 0      //
+//                   min {                                           //
+//                            1 + MATT(i - m1),        if i >= m1    //
+//                            1 + MATT(i - m2),        if i >= m2    //
+//                            .................        ..........    //
+//                            1 + MATT(i - mk),        if i >= mk    //
+//                   }                                               //
+//    }                                                              //
+//                                                                   //
+///////////////////////////////////////////////////////////////////////
+
 public class Mattonelle {
 
 	private static final int NONE = -1;
@@ -23,8 +39,7 @@ public class Mattonelle {
 				if (i == matt) {
 					v = 0;
 					break;
-				}
-				if (i >= matt) {
+				} else if (i > matt) {
 					if (m[i - matt] > 0) {
 						if (v == NONE) {
 							v = m[i - matt];

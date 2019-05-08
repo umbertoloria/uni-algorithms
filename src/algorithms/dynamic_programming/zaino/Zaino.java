@@ -3,6 +3,21 @@ package algorithms.dynamic_programming.zaino;
 import algorithms.dynamic_programming.Utils;
 import structures.List;
 
+////////////////////////////////////////////////////////////////////////////////////////////
+//    Problema dello zaino                                                                //
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                        //
+//    ZA(i, w) = {                                                                        //
+//                    0,                                         if i = 0                 //
+//                    ZA(i - 1, w)                               if w[i] > w              //
+//                    max {                                                               //
+//                             v[i] + ZA(i - 1, w - w[i])        if w >= w[i] && i > 0    //
+//                             ZA(i - 1, w)                      if w >= w[i] && i > 0    //
+//                    }                                                                   //
+//    }                                                                                   //
+//                                                                                        //
+////////////////////////////////////////////////////////////////////////////////////////////
+
 public class Zaino {
 
 	private List<Oggetto> oggetti = new List<>();

@@ -3,6 +3,20 @@ package algorithms.dynamic_programming.scheduling_intervalli_pesati;
 import sorting.MergeSort;
 import structures.List;
 
+////////////////////////////////////////////////////////////////////
+//    Scheduling di intervalli pesati                             //
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//    WIS(i) = {                                                  //
+//                  0,                                if i = 0    //
+//                  max {                                         //
+//                           v(i) + WIS(p(i)),        if i > 0    //
+//                           WIS(i - 1)               if i > 0    //
+//                  }                                             //
+//    }                                                           //
+//                                                                //
+////////////////////////////////////////////////////////////////////
+
 public class Scheduling {
 
 	private List<Intervallo> intervalli = new List<>();
