@@ -1,154 +1,95 @@
 package structures;
 
-import java.util.Collections;
+import java.lang.reflect.Array;
 import java.util.Iterator;
 
-public class List<T> implements Iterable<T> {
+public abstract class List<T> implements Iterable<T> {
 
-//	public int indexOf(T node) {}
-
-	private Node<T> head;
 	private int size = 0;
 
-	public T get(int index) {
-		if (size == 0 || index < 0 || index >= size) {
-			throw new IndexOutOfBoundsException("List reading index out of bounds");
-		}
-
-		return head.jump(index).value;
-	}
-
-	public void set(int index, T value) {
-		if (index < 0 || index > size) {
-			throw new IndexOutOfBoundsException("List assignment index out of bounds");
-		}
-
-		if (index == 0) {
-			head = new Node<>(value, head);
-		} else {
-			Node<T> prev = head.jump(index - 1);
-			prev.next = new Node<>(value, prev.next);
-		}
+	final void increaseSize() {
 		size++;
 	}
 
-	public void prepend(T value) {
-		head = new Node<>(value, head);
-		size++;
-	}
-
-	public void append(T value) {
-		if (size == 0) {
-			head = new Node<>(value);
-		} else {
-			head.jump(size - 1).next = new Node<>(value);
-		}
-		size++;
-	}
-
-	public void expand(List<T> external) {
-		if (external.size() > 0) {
-			Node<T> tail;
-			Node<T> app = external.head;
-			if (size == 0) {
-				head = new Node<>(external.head.value);
-				app = app.next;
-				size++;
-			}
-			tail = head.jump(size - 1);
-			while (app != null) {
-				tail.next = new Node<>(app.value);
-				app = app.next;
-				tail = tail.next;
-				size++;
-			}
-		}
-	}
-
-	public void remove(int index) {
-		if (index < 0 || index > size) {
-			throw new IndexOutOfBoundsException("List assignment index out of bounds");
-		}
-
-		if (index == 0) {
-			head = head.next;
-		} else {
-			Node<T> app = head.jump(index - 1);
-			app.next = app.next.next;
-		}
+	final void decreaseSize() {
 		size--;
 	}
 
-	public int size() {
+	// Retrieval
+
+	public abstract T get(int index);
+
+	// Insertion
+
+	public final void prepend(T value) {
+		set(0, value);
+	}
+
+	public final void append(T value) {
+		set(size, value);
+	}
+
+	public abstract void set(int index, T value);
+
+	public abstract void expand(List<T> external);
+
+	// Removal
+
+	public abstract void remove(int index);
+
+	// Controls
+
+	public final boolean empty() {
+		return size == 0;
+	}
+
+	public final int size() {
 		return size;
 	}
 
-	public boolean contains(T value) {
-		Node<T> app = head;
-		while (app != null) {
-			if (app.value == value) {
-				return true;
-			}
-			app = app.next;
-		}
-		return false;
-	}
+	public abstract boolean contains(T value);
 
-	public List<T> createReversed() {
-		List<T> result = new List<>();
+	// Utils
+
+	public final AList<T> createReverse() {
+		AList<T> result = new AList<>();
 		for (T item : this) {
 			result.prepend(item);
 		}
 		return result;
 	}
 
-	public void reverse() {
-		if (size >= 2) {
-			Node<T> to_empty = head.next;
-			Node<T> reversed = head;
-			reversed.next = null;
-			Node<T> tmp;
-			while (to_empty != null) {
-				tmp = to_empty;
-				to_empty = to_empty.next;
-				tmp.next = reversed;
-				reversed = tmp;
-			}
-			head = reversed;
-		}
-	}
+	public abstract void justReverse();
 
-	public String toString() {
-		if (size == 0) {
+	public abstract Iterator<T> iterator();
+
+	public final String toString() {
+		if (empty()) {
 			return "[]";
-		}
-		StringBuilder result = new StringBuilder("[");
-		Node<T> app = head;
-		for (int i = 0; i < size - 1; i++) {
-			result.append(app.value);
-			result.append(", ");
-			app = app.next;
-		}
-		result.append(app.value);
-		result.append("]");
-		return result.toString();
-	}
-
-	public Iterator<T> iterator() {
-		if (head != null) {
-			return head.createIterator();
 		} else {
-			return Collections.emptyIterator();
+			StringBuilder result = new StringBuilder("[");
+			for (T item : this) {
+				result.append(item);
+				result.append(", ");
+			}
+			result.delete(result.length() - 2, result.length());
+			result.append("]");
+			return result.toString();
 		}
 	}
 
-	public T[] toArray(T[] a) {
-		if (head == null) {
+	@SuppressWarnings("unchecked")
+	public final T[] toArray(T[] a) {
+		if (empty()) {
 			return null;
-		} else if (a != null) {
-			return head.toArray(a);
 		} else {
-			return null;
+			Iterator<T> it = iterator();
+			a = (T[]) Array.newInstance(a.getClass().getComponentType(), size());
+			int i = 0;
+			while (it.hasNext()) {
+				a[i++] = it.next();
+			}
+			return a;
 		}
 	}
 

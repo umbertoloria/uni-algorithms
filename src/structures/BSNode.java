@@ -87,8 +87,8 @@ public class BSNode<T extends Comparable<T>> {
 		return n.value;
 	}
 
-	List<Object[]> positionInfo(int level) {
-		List<Object[]> result = new List<>();
+	LList<Object[]> positionInfo(int level) {
+		LList<Object[]> result = new LList<>();
 		if (left != null) {
 			result.expand(left.positionInfo(level + 1));
 		}

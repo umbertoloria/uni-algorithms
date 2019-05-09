@@ -14,9 +14,7 @@ package algorithms.dynamic_programming;
 
 public class Fibonacci {
 
-	/**
-	 Complexity: time and space O(n)
-	 */
+	/** Complexity: time and space O(n) */
 	public static long fibonacci(int n) {
 		if (n == 0) {
 			return 0;

@@ -7,9 +7,7 @@ public class MergeSort {
 		mergesort(vect, 0, vect.length - 1);
 	}
 
-	/**
-	 Complexity: time O(n log n)
-	 */
+	/** Complexity: time O(n log n) */
 	private static <T extends Comparable<T>> void mergesort(T[] vect, int left, int right) {
 		if (left < right) {
 			int mid = (left + right) / 2;
@@ -19,9 +17,7 @@ public class MergeSort {
 		}
 	}
 
-	/**
-	 Complexity: time and space O(n)
-	 */
+	/** Complexity: time and space O(n) */
 	private static <T extends Comparable<T>> void merge(T[] vect, int left, int mid, int right) {
 		int i = left;
 		int j = mid + 1;

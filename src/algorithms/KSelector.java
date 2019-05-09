@@ -1,5 +1,6 @@
 package algorithms;
 
+import structures.AList;
 import structures.List;
 import structures.MaxHeap;
 import structures.MinHeap;
@@ -8,15 +9,13 @@ import java.lang.reflect.Array;
 
 public class KSelector<T extends Comparable<T>> {
 
-	private List<T> elements = new List<>();
+	private List<T> elements = new AList<>();
 
 	public void add(T elem) {
 		elements.append(elem);
 	}
 
-	/**
-	 Complexity: time O(k + (n - k) log k) and space O(k)
-	 */
+	/** Complexity: time O(k + (n - k) log k) and space O(k) */
 	@SuppressWarnings("unchecked")
 	public T[] smallest(int k, T[] app) {
 		if (elements.size() <= k) {
@@ -41,9 +40,7 @@ public class KSelector<T extends Comparable<T>> {
 		}
 	}
 
-	/**
-	 Complexity: time O(k + (n - k) log k) and space O(k)
-	 */
+	/** Complexity: time O(k + (n - k) log k) and space O(k) */
 	@SuppressWarnings("unchecked")
 	public T[] greatest(int k, T[] app) {
 		if (elements.size() <= k) {

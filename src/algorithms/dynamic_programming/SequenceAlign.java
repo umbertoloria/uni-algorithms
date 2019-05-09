@@ -29,9 +29,7 @@ public class SequenceAlign {
 		this.cv = cv;
 	}
 
-	/**
-	 Complexity: time and space O(nm)
-	 */
+	/** Complexity: time and space O(nm) */
 	public int distance(String a, String b) {
 		int[][] m = new int[a.length() + 1][b.length() + 1];
 		for (int j = 0; j <= b.length(); j++) {

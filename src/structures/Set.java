@@ -9,9 +9,7 @@ public class Set<T extends Comparable<T>> implements Iterable<T> {
 	private Object[] data = new Object[2];
 	private int size = 0;
 
-	/**
-	 Complexity: time O(n)
-	 */
+	/** Complexity: time O(n) */
 	public void add(T value) {
 		size++;
 		if (size == data.length) {
@@ -26,9 +24,7 @@ public class Set<T extends Comparable<T>> implements Iterable<T> {
 		data[i] = value;
 	}
 
-	/**
-	 Complexity: time O(n)
-	 */
+	/** Complexity: time O(n) */
 	public void remove(T value) {
 		int i = contains(value, 0, size - 1);
 		if (i >= 0) {
@@ -39,13 +35,12 @@ public class Set<T extends Comparable<T>> implements Iterable<T> {
 		}
 	}
 
+	/** Complexity: time O(log n) */
 	public boolean contains(T value) {
 		return contains(value, 0, size - 1) != -1;
 	}
 
-	/**
-	 Complexity: time O(log n)
-	 */
+	/** Complexity: time O(log n) */
 	private int contains(T value, int inf, int sup) {
 		if (inf <= sup) {
 			int mid = (inf + sup) / 2;
@@ -64,15 +59,16 @@ public class Set<T extends Comparable<T>> implements Iterable<T> {
 	public String toString() {
 		if (size == 0) {
 			return "[]";
+		} else {
+			StringBuilder res = new StringBuilder("[");
+			for (int i = 0; i < size - 1; i++) {
+				res.append(data[i]);
+				res.append(", ");
+			}
+			res.append(data[size - 1]);
+			res.append("]");
+			return res.toString();
 		}
-		StringBuilder res = new StringBuilder("[");
-		for (int i = 0; i < size - 1; i++) {
-			res.append(data[i]);
-			res.append(", ");
-		}
-		res.append(data[size - 1]);
-		res.append("]");
-		return res.toString();
 	}
 
 	public Iterator<T> iterator() {

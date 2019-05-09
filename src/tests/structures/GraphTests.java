@@ -1,12 +1,12 @@
 package tests.structures;
 
-import structures.Graph;
+import structures.UndirectGraph;
 
 public class GraphTests {
 
 	public static void main(String[] args) {
 
-		Graph<Integer> g = new Graph<>();
+		var g = new UndirectGraph<Integer, Integer>();
 
 		g.add(1);
 		g.add(2);
@@ -17,22 +17,22 @@ public class GraphTests {
 		g.add(7);
 		g.add(8);
 
-		g.link(1, 2);
-		g.link(1, 3);
+		g.link(1, 2, 0);
+		g.link(1, 3, 0);
 
-		g.link(2, 3);
-		g.link(2, 4);
-		g.link(2, 5);
+		g.link(2, 3, 0);
+		g.link(2, 4, 0);
+		g.link(2, 5, 0);
 
-		g.link(3, 5);
-		g.link(3, 7);
-		g.link(3, 8);
+		g.link(3, 5, 0);
+		g.link(3, 7, 0);
+		g.link(3, 8, 0);
 
-		g.link(4, 5);
+		g.link(4, 5, 0);
 
-		g.link(5, 6);
+		g.link(5, 6, 0);
 
-		g.link(7, 8);
+		g.link(7, 8, 0);
 
 		g.dfs(1);
 		System.out.println();

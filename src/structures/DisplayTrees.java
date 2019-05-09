@@ -2,7 +2,7 @@ package structures;
 
 class DisplayTrees {
 
-	static void showThroughPositionsList(List<Object[]> lls) {
+	static void showThroughPositionsList(LList<Object[]> lls) {
 		int mm = (int) lls.get(0)[0];
 		for (Object[] a : lls) {
 			mm = Math.max(mm, (int) a[0]);

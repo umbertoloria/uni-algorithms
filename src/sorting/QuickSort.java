@@ -2,9 +2,7 @@ package sorting;
 
 public class QuickSort {
 
-	/**
-	 Complexity: time O(n log n)
-	 */
+	/** Complexity: time O(n log n) */
 	public static <T extends Comparable<T>> void quicksort(T[] vect, int p, int q) {
 		if (p < q) {
 			int gap = partition(vect, p, q);
@@ -13,9 +11,7 @@ public class QuickSort {
 		}
 	}
 
-	/**
-	 Complexity: time O(n)
-	 */
+	/** Complexity: time O(n) */
 	private static <T extends Comparable<T>> int partition(T[] vect, int p, int q) {
 		T pivot = vect[(p + q) / 2];
 		int i = p;

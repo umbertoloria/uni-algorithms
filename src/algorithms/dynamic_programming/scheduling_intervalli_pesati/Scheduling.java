@@ -1,7 +1,7 @@
 package algorithms.dynamic_programming.scheduling_intervalli_pesati;
 
 import sorting.MergeSort;
-import structures.List;
+import structures.LList;
 
 ////////////////////////////////////////////////////////////////////
 //    Scheduling di intervalli pesati                             //
@@ -19,7 +19,7 @@ import structures.List;
 
 public class Scheduling {
 
-	private List<Intervallo> intervalli = new List<>();
+	private LList<Intervallo> intervalli = new LList<>();
 	private Intervallo[] lastSortedIntervalli;
 	private int[] lastPrecedente;
 	private int[] lastComputed;
@@ -30,6 +30,7 @@ public class Scheduling {
 
 	public void ottimale() {
 		Intervallo[] intervalli = this.intervalli.toArray(new Intervallo[0]);
+		assert intervalli != null;
 		MergeSort.mergesort(intervalli);
 		int[] precedente = new int[intervalli.length];
 		for (int i = 0; i < precedente.length; i++) {
@@ -62,11 +63,13 @@ public class Scheduling {
 	}
 
 	public Intervallo[] trovaSoluzione() {
-		List<Intervallo> intervalli = new List<>();
+		LList<Intervallo> intervalli = new LList<>();
 		int i = lastComputed.length - 1;
 		while (i > 0) {
 			if (lastComputed[i] != lastComputed[i - 1]) {
-				intervalli.append(lastSortedIntervalli[i - 1]);
+				Intervallo tmp = lastSortedIntervalli[i - 1];
+				System.out.println("Aggiunto intervallo " + tmp.nome);
+				intervalli.append(tmp);
 				i = lastPrecedente[i - 1] + 1;
 			} else {
 				i--;

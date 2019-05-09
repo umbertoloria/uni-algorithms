@@ -1,59 +1,78 @@
 package structures;
 
-public class Graph<T> {
+import java.util.Iterator;
 
-	private List<T> nodes = new List<>();
-	private HashTable<T, List<T>> edges = new HashTable<>();
+public class DirectGraph<T extends Comparable<T>, V> {
+
+	private final class Edge implements Comparable<Edge> {
+
+		final T node;
+		final V value;
+
+		Edge(T node, V value) {
+			this.node = node;
+			this.value = value;
+		}
+
+		public int compareTo(Edge o) {
+			return node.compareTo(o.node);
+		}
+
+	}
+
+	private Set<T> nodes = new Set<>();
+	private HashTable<T, Set<Edge>> edges = new HashTable<>();
 
 	public boolean exists(T node) {
-		for (T cnode : nodes) {
-			if (cnode == node) {
-				return true;
-			}
-		}
-		return false;
+		return nodes.contains(node);
 	}
 
 	public void add(T node) {
 		if (!exists(node)) {
-			nodes.append(node);
-			edges.put(node, new List<>());
+			nodes.add(node);
+			edges.put(node, new Set<>());
 		}
 	}
 
 //	public void remove (T node) {
 //		if (exists(node)) {
 //			nodes.remove(nodes.indexOf(node));
-//			edges.put(node, new List<>());
+//			edges.put(node, new LList<>());
 //		}
 //	}
 
 	public boolean linked(T a, T b) {
 		if (!exists(a) || !exists(b)) {
 			return false;
+		} else {
+			return a == b || edges.get(a).contains(new Edge(b, null));
 		}
-		return a == b || edges.get(a).contains(b);
 	}
 
-	public void link(T a, T b) {
+	public void link(T a, T b, V value) {
 		if (exists(a) && exists(b) && !linked(a, b)) {
-			edges.get(a).append(b);
-			edges.get(b).append(a);
+			edges.get(a).add(new Edge(b, value));
 		}
 	}
 
-	public List<T> adjacents(T a) {
+	public LList<T> adjacents(T a) {
 		if (!exists(a)) {
 			return null;
 		}
-		return edges.get(a);
+		Iterator<Edge> it = edges.get(a).iterator();
+		LList<T> nodes = new LList<>();
+		while (it.hasNext()) {
+			nodes.append(it.next().node);
+		}
+		return nodes;
+
 	}
 
 	public void dfs(T node) {
 		if (exists(node)) {
 			System.out.println("Depth First Search");
 
-			List<T> explored = new List<>();
+			List<T> explored = new LList<>();
 
 			Stack<Pair<T, Integer>> pila = new Stack<>();
 			pila.push(new Pair<>(node, 0));
@@ -70,7 +89,7 @@ public class Graph<T> {
 
 					explored.append(elem);
 
-					for (T adjacent : adjacents(elem).createReversed()) {
+					for (T adjacent : adjacents(elem).createReverse()) {
 						pila.push(new Pair<>(adjacent, index + 1));
 					}
 
@@ -80,25 +99,7 @@ public class Graph<T> {
 		}
 	}
 
-//	public void dfs_rec(T node) {
-//		dfs_rec(node, new List<>(), 1);
-//	}
-//
-//	private void dfs_rec(T node, List<T> explored, int index) {
-//		if (exists(node)) {
-//			explored.append(node);
-//			System.out.println(" | ".repeat(index) + " " + node);
-//			for (T adjacent : adjacents(node)) {
-//				if (!explored.contains(adjacent)) {
-//					dfs_rec(adjacent, explored, index + 1);
-//				}
-//			}
-//		}
-//	}
-
-	/**
-	 Tempo: O(2m + n)
-	 */
+	/** Complexity: time O(2m + n) */
 	public void bfs(T node) {
 		if (exists(node)) {
 
@@ -107,13 +108,13 @@ public class Graph<T> {
 			coda.push(node);
 
 			// Lista che permette di evitare di servire un elemento già "scoperto"
-			List<T> discovered = new List<>();
+			LList<T> discovered = new LList<>();
 			discovered.append(node);
 
 			// Ogni livello della visita avrà una propria lista contenente gli elementi appartenenti relativo livello
-			List<List<T>> layers = new List<>();
+			LList<LList<T>> layers = new LList<>();
 			// Inizialmente si inserisce il primo livello
-			layers.append(new List<>());
+			layers.append(new LList<>());
 			// Il numero di elementi da servire nella coda per completare il livello corrente è inizialmente 1
 			int currentLayerCount = 1;
 
@@ -141,7 +142,7 @@ public class Graph<T> {
 					currentLayerCount = coda.size();
 					if (currentLayerCount > 0) {
 						// Il prossimo livello esisterà solo se la coda contiene almeno un elemento
-						layers.append(new List<>());
+						layers.append(new LList<>());
 					}
 				}
 
@@ -149,7 +150,7 @@ public class Graph<T> {
 
 			System.out.println("Breadth First Search");
 			int layerCount = 1;
-			for (List<T> layer : layers) {
+			for (LList<T> layer : layers) {
 				System.out.print("Lvl " + layerCount++ + ": ");
 				for (int i = 0; i < layer.size() - 1; i++) {
 					System.out.print(layer.get(i) + ", ");

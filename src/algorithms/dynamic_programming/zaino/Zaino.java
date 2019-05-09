@@ -1,6 +1,8 @@
 package algorithms.dynamic_programming.zaino;
 
 import algorithms.dynamic_programming.Utils;
+import structures.AList;
+import structures.LList;
 import structures.List;
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,16 +22,14 @@ import structures.List;
 
 public class Zaino {
 
-	private List<Oggetto> oggetti = new List<>();
+	private List<Oggetto> oggetti = new AList<>();
 	private int[][] lastComputation;
 
 	public void add(Oggetto oggetto) {
 		oggetti.append(oggetto);
 	}
 
-	/**
-	 Complexity: time and space O(nW)
-	 */
+	/** Complexity: time and space O(nW) */
 	public int ruba(int W) {
 		int n = oggetti.size();
 		int[][] m = new int[n + 1][W + 1];
@@ -67,7 +67,7 @@ public class Zaino {
 	}
 
 	public Oggetto[] analisi() {
-		List<Oggetto> result = new List<>();
+		List<Oggetto> result = new LList<>();
 		int w = lastComputation[0].length - 1;
 		int i = lastComputation.length - 1;
 		while (lastComputation[i][w] > 0) {

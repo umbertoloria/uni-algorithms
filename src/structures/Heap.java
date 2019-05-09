@@ -15,25 +15,19 @@ class Heap<T extends Comparable<T>> {
 		return size == 0;
 	}
 
-	/**
-	 Complexity: time O(1)
-	 */
+	/** Complexity: time O(1) */
 	public T peek() {
 		return (T) data[0];
 	}
 
-	/**
-	 Complexity: time O(log n)
-	 */
+	/** Complexity: time O(log n) */
 	public void insert(T value) {
 		data[size] = value;
 		size++;
 		heapifyUp();
 	}
 
-	/**
-	 Complexity: time O(log n)
-	 */
+	/** Complexity: time O(log n) */
 	public T extract() {
 		T result = (T) data[0];
 		size--;
@@ -73,15 +67,15 @@ class Heap<T extends Comparable<T>> {
 		DisplayTrees.showThroughPositionsList(positionInfo(0, 1));
 	}
 
-	private List<Object[]> positionInfo(int indexNode, int level) {
+	private LList<Object[]> positionInfo(int indexNode, int level) {
 		if (0 <= indexNode && indexNode < size) {
-			List<Object[]> result = new List<>();
+			LList<Object[]> result = new LList<>();
 			result.expand(positionInfo(getLeftChildIndex(indexNode), level + 1));
 			result.append(new Object[]{level, data[indexNode]});
 			result.expand(positionInfo(getRightChildIndex(indexNode), level + 1));
 			return result;
 		} else {
-			return new List<>();
+			return new LList<>();
 		}
 	}
 
