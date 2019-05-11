@@ -64,18 +64,7 @@ public abstract class List<T> implements Iterable<T> {
 	public abstract Iterator<T> iterator();
 
 	public final String toString() {
-		if (empty()) {
-			return "[]";
-		} else {
-			StringBuilder result = new StringBuilder("[");
-			for (T item : this) {
-				result.append(item);
-				result.append(", ");
-			}
-			result.delete(result.length() - 2, result.length());
-			result.append("]");
-			return result.toString();
-		}
+		return DSUtils.makeString(iterator());
 	}
 
 	@SuppressWarnings("unchecked")

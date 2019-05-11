@@ -25,7 +25,7 @@ public class StackTests {
 		System.out.println("Inserted 40");
 		pila.push(40);
 		System.out.println("Topped " + pila.top());
-		System.out.println("Its size is " + pila.size());
+		System.out.println("Its count is " + pila.size());
 	}
 
 }

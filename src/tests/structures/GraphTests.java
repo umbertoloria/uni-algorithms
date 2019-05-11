@@ -1,12 +1,12 @@
 package tests.structures;
 
-import structures.UndirectGraph;
+import structures.DirectGraph;
 
 public class GraphTests {
 
 	public static void main(String[] args) {
 
-		var g = new UndirectGraph<Integer, Integer>();
+		var g = new DirectGraph<Integer, Integer>();
 
 		g.add(1);
 		g.add(2);
@@ -48,10 +48,9 @@ public class GraphTests {
 			System.out.println("5-6 link exists");
 		}
 
-		System.out.print("Adjacent with 7:");
-		for (Integer adjacent : g.adjacents(7)) {
-			System.out.print(" " + adjacent);
-		}
+		System.out.println("Outgoing from 7: " + g.outgoing(7));
+		System.out.println("Incoming to 7: " + g.incoming(7));
+		System.out.println("Nodes: " + g.nodes());
 
 	}
 

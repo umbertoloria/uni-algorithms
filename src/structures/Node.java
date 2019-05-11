@@ -1,8 +1,5 @@
 package structures;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 class Node<T> {
 
 	T value;
@@ -27,16 +24,6 @@ class Node<T> {
 
 	public String toString() {
 		return value.toString();
-	}
-
-	Iterator<T> createIterator() {
-		ArrayList<T> result = new ArrayList<>();
-		Node<T> app = this;
-		while (app != null) {
-			result.add(app.value);
-			app = app.next;
-		}
-		return result.iterator();
 	}
 
 }

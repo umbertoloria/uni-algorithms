@@ -64,7 +64,7 @@ class Heap<T extends Comparable<T>> {
 	}
 
 	public void show() {
-		DisplayTrees.showThroughPositionsList(positionInfo(0, 1));
+		DSUtils.showThroughPositionsList(positionInfo(0, 1));
 	}
 
 	private LList<Object[]> positionInfo(int indexNode, int level) {

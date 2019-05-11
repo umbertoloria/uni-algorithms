@@ -1,11 +1,17 @@
 package structures;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 @SuppressWarnings("unchecked")
 public class AList<T> extends List<T> {
+
+	public static void main(String[] args) {
+		Set<Integer> a = new Set<>();
+		for (int i = 0; i < 1000; i++) {
+			a.add(i);
+		}
+		System.out.println(a);
+	}
 
 	private Object[] data = new Object[16];
 
@@ -28,6 +34,15 @@ public class AList<T> extends List<T> {
 			}
 			data[index] = value;
 			increaseSize();
+			ensureCapacity();
+		}
+	}
+
+	private void ensureCapacity() {
+		if (size() >= data.length) {
+			Object[] tmp = data;
+			data = new Object[data.length * 2];
+			System.arraycopy(tmp, 0, data, 0, tmp.length);
 		}
 	}
 
@@ -73,15 +88,7 @@ public class AList<T> extends List<T> {
 	}
 
 	public Iterator<T> iterator() {
-		if (empty()) {
-			return Collections.emptyIterator();
-		} else {
-			ArrayList<T> result = new ArrayList<>();
-			for (int i = 0; i < size(); i++) {
-				result.add((T) data[i]);
-			}
-			return result.iterator();
-		}
+		return new ArrayIterator<>(data, size());
 	}
 
 }

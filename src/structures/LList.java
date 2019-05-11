@@ -1,6 +1,5 @@
 package structures;
 
-import java.util.Collections;
 import java.util.Iterator;
 
 public class LList<T> extends List<T> {
@@ -89,11 +88,7 @@ public class LList<T> extends List<T> {
 	}
 
 	public Iterator<T> iterator() {
-		if (head != null) {
-			return head.createIterator();
-		} else {
-			return Collections.emptyIterator();
-		}
+		return new LinkedIterator<>(head);
 	}
 
 }

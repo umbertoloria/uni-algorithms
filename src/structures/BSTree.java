@@ -33,7 +33,7 @@ public class BSTree<T extends Comparable<T>> {
 	}
 
 	public void show() {
-		DisplayTrees.showThroughPositionsList(root.positionInfo(1));
+		DSUtils.showThroughPositionsList(root.positionInfo(1));
 	}
 
 }

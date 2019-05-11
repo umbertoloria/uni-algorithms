@@ -1,6 +1,8 @@
 package structures;
 
-class DisplayTrees {
+import java.util.Iterator;
+
+class DSUtils {
 
 	static void showThroughPositionsList(LList<Object[]> lls) {
 		int mm = (int) lls.get(0)[0];
@@ -18,6 +20,19 @@ class DisplayTrees {
 			System.out.println();
 		}
 		System.out.println();
+	}
+
+	static String makeString(Iterator it) {
+		StringBuilder result = new StringBuilder("[");
+		while (it.hasNext()) {
+			result.append(it.next());
+			result.append(", ");
+		}
+		if (result.length() > 1) {
+			result.delete(result.length() - 2, result.length());
+		}
+		result.append("]");
+		return result.toString();
 	}
 
 }

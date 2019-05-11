@@ -26,7 +26,7 @@ public class QueueTests {
 		}
 		System.out.println("Inserted 7");
 		coda.push(7);
-		System.out.println("Its size is " + coda.size());
+		System.out.println("Its count is " + coda.size());
 		System.out.println("Peeked " + coda.peek());
 	}
 

@@ -1,6 +1,5 @@
 package structures;
 
-import java.util.Collections;
 import java.util.Iterator;
 
 public class Stack<T> implements Iterable<T> {
@@ -36,11 +35,7 @@ public class Stack<T> implements Iterable<T> {
 	}
 
 	public Iterator<T> iterator() {
-		if (first != null) {
-			return first.createIterator();
-		} else {
-			return Collections.emptyIterator();
-		}
+		return new LinkedIterator<>(first);
 	}
 
 }
