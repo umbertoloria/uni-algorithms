@@ -1,12 +1,12 @@
 package tests.dynamic_programming;
 
 import algorithms.dynamic_programming.scheduling_intervalli_pesati.Intervallo;
-import algorithms.dynamic_programming.scheduling_intervalli_pesati.Scheduling;
+import algorithms.dynamic_programming.scheduling_intervalli_pesati.SchedulingPesato;
 
-public class SchedulingTests {
+public class SchedulingPesatoTests {
 
 	public static void main(String[] args) {
-		Scheduling sc = new Scheduling();
+		SchedulingPesato sc = new SchedulingPesato();
 		sc.add(new Intervallo("1", 1, 4, 2));
 		sc.add(new Intervallo("2", 2, 7, 4));
 		sc.add(new Intervallo("3", 5, 10, 4));

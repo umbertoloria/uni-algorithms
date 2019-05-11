@@ -11,13 +11,13 @@ import structures.LList;
 //                  0,                                if i = 0    //
 //                  max {                                         //
 //                           v(i) + WIS(p(i)),        if i > 0    //
-//                           WIS(i - 1)               if i > 0    //
+//                           WIS(i-1)                 if i > 0    //
 //                  }                                             //
 //    }                                                           //
 //                                                                //
 ////////////////////////////////////////////////////////////////////
 
-public class Scheduling {
+public class SchedulingPesato {
 
 	private LList<Intervallo> intervalli = new LList<>();
 	private Intervallo[] lastSortedIntervalli;
