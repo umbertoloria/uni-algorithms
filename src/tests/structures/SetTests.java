@@ -37,6 +37,32 @@ public class SetTests {
 		if (!a.contains(0)) {
 			System.out.println("non contiene 0");
 		}
+		System.out.println("to list: " + a.toList());
+		System.out.println("is empty: " + a.empty());
+
+		Set<Integer> c = new Set<>();
+		c.add(1);
+		c.add(2);
+		c.add(3);
+		c.add(4);
+		c.add(8);
+		c.add(10);
+		c.add(13);
+		c.add(15);
+		c.add(18);
+
+		Set<Integer> d = new Set<>();
+		d.add(2);
+		d.add(4);
+		d.add(5);
+		d.add(7);
+		d.add(13);
+		d.add(15);
+		d.add(120);
+
+		System.out.println("c  : " + c);
+		System.out.println("d  : " + d);
+		System.out.println("c-d: " + c.difference(d));
 	}
 
 }

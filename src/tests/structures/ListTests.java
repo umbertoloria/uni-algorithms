@@ -3,6 +3,7 @@ package tests.structures;
 import structures.AList;
 import structures.LList;
 import structures.List;
+import structures.Set;
 
 public class ListTests {
 
@@ -42,6 +43,7 @@ public class ListTests {
 		if (c.contains(7)) {
 			System.out.println("r search 7");
 		}
+		System.out.println("r to set      : " + Set.fromList(r));
 	}
 
 }

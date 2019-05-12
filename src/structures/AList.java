@@ -5,14 +5,6 @@ import java.util.Iterator;
 @SuppressWarnings("unchecked")
 public class AList<T> extends List<T> {
 
-	public static void main(String[] args) {
-		Set<Integer> a = new Set<>();
-		for (int i = 0; i < 1000; i++) {
-			a.add(i);
-		}
-		System.out.println(a);
-	}
-
 	private Object[] data = new Object[16];
 
 	public T get(int index) {

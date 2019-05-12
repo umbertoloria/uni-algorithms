@@ -2,10 +2,10 @@ package structures;
 
 public class DirectGraph<V extends Comparable<V>, E> {
 
-	private final class Edge implements Comparable<Edge> {
+	private class Edge implements Comparable<Edge> {
 
-		final V destNode;
-		final E value;
+		private V destNode;
+		private E value;
 
 		Edge(V destNode, E value) {
 			this.destNode = destNode;
@@ -14,6 +14,10 @@ public class DirectGraph<V extends Comparable<V>, E> {
 
 		public int compareTo(Edge o) {
 			return destNode.compareTo(o.destNode);
+		}
+
+		public void setValue(E value) {
+			this.value = value;
 		}
 
 	}
@@ -30,12 +34,8 @@ public class DirectGraph<V extends Comparable<V>, E> {
 		}
 	}
 
-	public List<V> nodes() {
-		List<V> result = new AList<>();
-		for (V node : edges.keys()) {
-			result.append(node);
-		}
-		return result;
+	public Set<V> nodes() {
+		return Set.fromList(edges.keys());
 	}
 
 	public E value(V a, V b) {
@@ -49,36 +49,44 @@ public class DirectGraph<V extends Comparable<V>, E> {
 //	public void remove (V destNode) {}
 
 	public boolean linked(V a, V b) {
-		if (!exists(a) || !exists(b)) {
-			return false;
+		if (exists(a) && exists(b)) {
+			return a.equals(b) || edges.get(a).contains(new Edge(b, null));
 		} else {
-			return a == b || edges.get(a).contains(new Edge(b, null));
+			return false;
 		}
 	}
 
-	public void link(V a, V b, E value) {
-		if (exists(a) && exists(b) && !linked(a, b)) {
-			edges.get(a).add(new Edge(b, value));
+	public boolean link(V a, V b, E value) {
+		if (exists(a) && exists(b)) {
+			Edge e = edges.get(a).get(new Edge(b, null));
+			if (e == null) {
+				edges.get(a).add(new Edge(b, value));
+			} else if (!e.value.equals(value)) {
+				e.setValue(value);
+			}
+			return true;
+		} else {
+			return false;
 		}
 	}
 
-	public List<V> outgoing(V a) {
-		List<V> nodes = new LList<>();
+	public Set<V> outgoing(V a) {
+		Set<V> nodes = new Set<>();
 		Set<Edge> outgoings = edges.get(a);
 		if (outgoings != null) {
 			for (Edge edge : outgoings) {
-				nodes.append(edge.destNode);
+				nodes.add(edge.destNode);
 			}
 		}
 		return nodes;
 	}
 
-	public List<V> incoming(V a) {
-		List<V> nodes = new LList<>();
+	public Set<V> incoming(V a) {
+		Set<V> nodes = new Set<>();
 		for (V node : edges.keys()) {
 			if (node.compareTo(a) != 0) {
 				if (edges.get(node).contains(new Edge(a, null))) {
-					nodes.append(node);
+					nodes.add(node);
 				}
 			}
 		}
@@ -106,7 +114,7 @@ public class DirectGraph<V extends Comparable<V>, E> {
 
 					explored.append(elem);
 
-					for (V adjacent : outgoing(elem).createReverse()) {
+					for (V adjacent : outgoing(elem).toList().createReverse()) {
 						pila.push(new Pair<>(adjacent, index + 1));
 					}
 

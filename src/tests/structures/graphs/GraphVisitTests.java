@@ -1,8 +1,8 @@
-package tests.structures;
+package tests.structures.graphs;
 
 import structures.DirectGraph;
 
-public class GraphTests {
+public class GraphVisitTests {
 
 	public static void main(String[] args) {
 
