@@ -114,7 +114,7 @@ public class DirectGraph<V extends Comparable<V>, E> {
 
 					explored.append(elem);
 
-					for (V adjacent : outgoing(elem).toList().createReverse()) {
+					for (V adjacent : outgoing(elem).toList().justReverse()) {
 						pila.push(new Pair<>(adjacent, index + 1));
 					}
 

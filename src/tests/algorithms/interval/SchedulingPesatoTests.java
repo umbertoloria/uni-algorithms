@@ -1,7 +1,7 @@
-package tests.algorithms.dynamic_programming;
+package tests.algorithms.interval;
 
-import algorithms.dynamic_programming.IntervalloPesato;
-import algorithms.dynamic_programming.SchedulingPesato;
+import algorithms.interval.IntervalloPesato;
+import algorithms.interval.SchedulingPesato;
 
 public class SchedulingPesatoTests {
 

@@ -71,7 +71,7 @@ public class LList<T> extends List<T> {
 		return false;
 	}
 
-	public void justReverse() {
+	public LList<T> justReverse() {
 		if (size() >= 2) {
 			Node<T> to_empty = head.next;
 			Node<T> reversed = head;
@@ -85,6 +85,7 @@ public class LList<T> extends List<T> {
 			}
 			head = reversed;
 		}
+		return this;
 	}
 
 	public Iterator<T> iterator() {

@@ -1,4 +1,4 @@
-package algorithms.dynamic_programming;
+package algorithms.interval;
 
 public class Intervallo implements Comparable<Intervallo> {
 

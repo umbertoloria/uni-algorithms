@@ -66,7 +66,7 @@ public class HashTable<K extends Comparable<K>, V> {
 		return hash;
 	}
 
-	public int count() {
+	public int size() {
 		return count;
 	}
 

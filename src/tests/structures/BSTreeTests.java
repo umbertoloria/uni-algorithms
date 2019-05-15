@@ -12,13 +12,13 @@ public class BSTreeTests {
 		t.put(12);
 		t.show();
 		System.out.println("Contains 10: " + t.contains(10));
-		System.out.println("Count      : " + t.count());
+		System.out.println("Count      : " + t.size());
 		t.remove(8);
 		t.show();
 		t.remove(10);
 		t.show();
 		System.out.println("Contains 10: " + t.contains(10));
-		System.out.println("Count      : " + t.count());
+		System.out.println("Count      : " + t.size());
 	}
 
 }

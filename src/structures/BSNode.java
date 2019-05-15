@@ -117,13 +117,13 @@ public class BSNode<T extends Comparable<T>> {
 		return result;
 	}
 
-	int count() {
+	int size() {
 		int result = 1;
 		if (left != null) {
-			result += left.count();
+			result += left.size();
 		}
 		if (right != null) {
-			result += right.count();
+			result += right.size();
 		}
 		return result;
 	}

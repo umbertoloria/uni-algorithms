@@ -1,8 +1,8 @@
-package tests.algorithms.dynamic_programming;
+package tests.algorithms.interval;
 
-import algorithms.dynamic_programming.Classe;
-import algorithms.dynamic_programming.PartizionamentoIntervalli;
-import algorithms.dynamic_programming.Intervallo;
+import algorithms.interval.Classe;
+import algorithms.interval.PartizionamentoIntervalli;
+import algorithms.interval.Intervallo;
 
 public class PartizionamentoIntervalliTests {
 

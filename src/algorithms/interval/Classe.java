@@ -1,4 +1,4 @@
-package algorithms.dynamic_programming;
+package algorithms.interval;
 
 import structures.AList;
 

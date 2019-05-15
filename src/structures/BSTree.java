@@ -8,8 +8,8 @@ public class BSTree<T extends Comparable<T>> {
 		root = new BSNode<>(value);
 	}
 
-	public int count() {
-		return root.count();
+	public int size() {
+		return root.size();
 	}
 
 	public void put(T item) {

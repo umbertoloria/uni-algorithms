@@ -15,6 +15,10 @@ class Heap<T extends Comparable<T>> {
 		return size == 0;
 	}
 
+	public int size() {
+		return size;
+	}
+
 	/** Complexity: time O(1) */
 	public T peek() {
 		return (T) data[0];
@@ -57,6 +61,7 @@ class Heap<T extends Comparable<T>> {
 				T tmp = (T) data[index];
 				data[index] = data[smallestChildIndex];
 				data[smallestChildIndex] = tmp;
+				index = smallestChildIndex;
 			} else {
 				break;
 			}

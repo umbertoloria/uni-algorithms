@@ -71,12 +71,13 @@ public class AList<T> extends List<T> {
 		return false;
 	}
 
-	public void justReverse() {
+	public AList<T> justReverse() {
 		for (int i = 0; i < size() / 2; i++) {
 			T tmp = (T) data[i];
 			data[i] = data[size() - 1 - i];
 			data[size() - 1 - i] = tmp;
 		}
+		return this;
 	}
 
 	public Iterator<T> iterator() {

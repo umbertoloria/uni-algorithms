@@ -59,7 +59,7 @@ public abstract class List<T> implements Iterable<T> {
 		return result;
 	}
 
-	public abstract void justReverse();
+	public abstract List<T> justReverse();
 
 	public abstract Iterator<T> iterator();
 

@@ -1,7 +1,7 @@
-package tests.algorithms.dynamic_programming;
+package tests.algorithms.interval;
 
-import algorithms.dynamic_programming.Intervallo;
-import algorithms.dynamic_programming.SchedulingNormale;
+import algorithms.interval.Intervallo;
+import algorithms.interval.SchedulingNormale;
 
 public class SchedulingNormaleTests {
 

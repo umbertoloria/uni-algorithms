@@ -44,7 +44,7 @@ public class HashTableTests {
 		System.out.println("antonio: " + ht.get("antonio"));
 		System.out.println("mario  : " + ht.get("mario"));
 		System.out.println("umberto: " + ht.get("umberto"));
-		System.out.println("count: " + ht.count());
+		System.out.println("size: " + ht.size());
 		System.out.println("capacity: " + ht.capacity());
 		System.out.println("chiavi: " + ht.keys());
 		System.out.println();

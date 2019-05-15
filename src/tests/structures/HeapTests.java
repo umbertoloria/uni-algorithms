@@ -13,7 +13,7 @@ public class HeapTests {
 		h.insert(12);
 		h.insert(11);
 		h.show();
-		System.out.println(h.extract());
+		System.out.println("Min: " + h.extract());
 		h.show();
 		if (h.empty()) {
 			System.out.println("The heap is empty.");
