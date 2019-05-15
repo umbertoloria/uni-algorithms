@@ -1,4 +1,4 @@
-package tests.dynamic_programming;
+package tests.algorithms.dynamic_programming;
 
 import algorithms.dynamic_programming.SequenceAlign;
 

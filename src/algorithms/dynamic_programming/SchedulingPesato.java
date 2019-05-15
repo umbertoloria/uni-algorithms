@@ -1,4 +1,4 @@
-package algorithms.dynamic_programming.scheduling_intervalli_pesati;
+package algorithms.dynamic_programming;
 
 import sorting.MergeSort;
 import structures.LList;
@@ -19,17 +19,17 @@ import structures.LList;
 
 public class SchedulingPesato {
 
-	private LList<Intervallo> intervalli = new LList<>();
-	private Intervallo[] lastSortedIntervalli;
+	private LList<IntervalloPesato> intervalli = new LList<>();
+	private IntervalloPesato[] lastSortedIntervalli;
 	private int[] lastPrecedente;
 	private int[] lastComputed;
 
-	public void add(Intervallo intervallo) {
+	public void add(IntervalloPesato intervallo) {
 		intervalli.append(intervallo);
 	}
 
 	public void ottimale() {
-		Intervallo[] intervalli = this.intervalli.toArray(new Intervallo[0]);
+		IntervalloPesato[] intervalli = this.intervalli.toArray(new IntervalloPesato[0]);
 		assert intervalli != null;
 		MergeSort.mergesort(intervalli);
 		int[] precedente = new int[intervalli.length];
@@ -62,12 +62,12 @@ public class SchedulingPesato {
 		System.out.println("|");
 	}
 
-	public Intervallo[] trovaSoluzione() {
-		LList<Intervallo> intervalli = new LList<>();
+	public IntervalloPesato[] trovaSoluzione() {
+		LList<IntervalloPesato> intervalli = new LList<>();
 		int i = lastComputed.length - 1;
 		while (i > 0) {
 			if (lastComputed[i] != lastComputed[i - 1]) {
-				Intervallo tmp = lastSortedIntervalli[i - 1];
+				IntervalloPesato tmp = lastSortedIntervalli[i - 1];
 				System.out.println("Aggiunto intervallo " + tmp.nome);
 				intervalli.append(tmp);
 				i = lastPrecedente[i - 1] + 1;
@@ -75,7 +75,7 @@ public class SchedulingPesato {
 				i--;
 			}
 		}
-		return intervalli.toArray(new Intervallo[0]);
+		return intervalli.toArray(new IntervalloPesato[0]);
 	}
 
 }
