@@ -74,6 +74,37 @@ public class Set<T extends Comparable<T>> implements Iterable<T> {
 		return BinarySearch.search(data, value, 0, size - 1) >= 0;
 	}
 
+	public Set<T> union(Set<T> other) {
+		Set<T> result = new Set<>();
+		int i = 0;
+		int j = 0;
+		int k = 0;
+		while (i < size && j < other.size) {
+			T a = (T) data[i];
+			T b = (T) other.data[j];
+			int cmp = a.compareTo(b);
+			result.ensureCapacity(k + 1);
+			if (cmp < 0) {
+				result.data[k++] = data[i++];
+			} else if (cmp == 0) {
+				result.data[k++] = data[i++];
+				j++;
+			} else {
+				result.data[k++] = other.data[j++];
+			}
+		}
+		while (i < size) {
+			result.ensureCapacity(k + 1);
+			result.data[k++] = data[i++];
+		}
+		while (j < other.size) {
+			result.ensureCapacity(k + 1);
+			result.data[k++] = other.data[j++];
+		}
+		result.size = k;
+		return result;
+	}
+
 	public Set<T> difference(Set<T> other) {
 		Set<T> result = new Set<>();
 		int i = 0;
