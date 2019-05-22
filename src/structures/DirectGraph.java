@@ -1,28 +1,8 @@
 package structures;
 
-public class DirectGraph<V extends Comparable<V>, E> {
+public class DirectGraph<V extends Comparable<V>, W extends Comparable<W>> {
 
-	private class Edge implements Comparable<Edge> {
-
-		private V destNode;
-		private E value;
-
-		Edge(V destNode, E value) {
-			this.destNode = destNode;
-			this.value = value;
-		}
-
-		public int compareTo(Edge o) {
-			return destNode.compareTo(o.destNode);
-		}
-
-		public void setValue(E value) {
-			this.value = value;
-		}
-
-	}
-
-	private HashTable<V, Set<Edge>> edges = new HashTable<>();
+	private HashTable<V, LList<Edge<V, W>>> edges = new HashTable<>();
 
 	public boolean exists(V node) {
 		return edges.hasKey(node);
@@ -30,7 +10,7 @@ public class DirectGraph<V extends Comparable<V>, E> {
 
 	public void add(V node) {
 		if (!exists(node)) {
-			edges.put(node, new Set<>());
+			edges.put(node, new LList<>());
 		}
 	}
 
@@ -38,55 +18,82 @@ public class DirectGraph<V extends Comparable<V>, E> {
 		return Set.fromList(edges.keys());
 	}
 
-	public E value(V a, V b) {
-		if (linked(a, b)) {
-			return edges.get(a).get(new Edge(b, null)).value;
-		} else {
-			return null;
+	public Set<Edge<V, W>> edges() {
+		Set<Edge<V, W>> res = new Set<>();
+		for (V from : edges.keys()) {
+			for (Edge<V, W> fromFrom : edges.get(from)) {
+				res.add(fromFrom);
+			}
 		}
+		return res;
 	}
+
+//	public W weight(V from, V to) {
+//		if (exists(from) && exists(to)) {
+//			for (Edge<V, W> adj : edges.get(from)) {
+//				if (adj.to.compareTo(to) == 0) {
+//					return adj.weight;
+//				}
+//			}
+//		}
+//		return null;
+//	}
 
 //	public void remove (V destNode) {}
 
-	public boolean linked(V a, V b) {
-		if (exists(a) && exists(b)) {
-			return a.equals(b) || edges.get(a).contains(new Edge(b, null));
-		} else {
-			return false;
+	public boolean linked(V from, V to) {
+		if (exists(from) && exists(to)) {
+			if (from.compareTo(to) == 0) {
+				return true;
+			} else {
+				for (Edge<V, W> fromFrom : edges.get(from)) {
+					if (fromFrom.to.compareTo(to) == 0) {
+						return true;
+					}
+				}
+			}
 		}
+		return false;
 	}
 
-	public boolean link(V a, V b, E value) {
-		if (exists(a) && exists(b)) {
-			Edge e = edges.get(a).get(new Edge(b, null));
-			if (e == null) {
-				edges.get(a).add(new Edge(b, value));
-			} else if (!e.value.equals(value)) {
-				e.setValue(value);
+	public boolean link(V from, V to, W weight) {
+		if (exists(from) && exists(to) && from.compareTo(to) != 0) {
+			LList<Edge<V, W>> adjs = edges.get(from);
+			int i = 0;
+			while (i < adjs.size()) {
+				if (adjs.get(i).to.compareTo(to) == 0) {
+					break;
+				}
+				i++;
 			}
+			if (i < adjs.size()) {
+				adjs.remove(i);
+			}
+			adjs.append(new Edge<>(from, to, weight));
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public Set<V> outgoing(V a) {
+	public Set<V> outgoing(V from) {
 		Set<V> nodes = new Set<>();
-		Set<Edge> outgoings = edges.get(a);
-		if (outgoings != null) {
-			for (Edge edge : outgoings) {
-				nodes.add(edge.destNode);
+		if (exists(from)) {
+			for (Edge<V, W> fromFrom : edges.get(from)) {
+				nodes.add(fromFrom.to);
 			}
 		}
 		return nodes;
 	}
 
-	public Set<V> incoming(V a) {
+	public Set<V> incoming(V to) {
 		Set<V> nodes = new Set<>();
 		for (V node : edges.keys()) {
-			if (node.compareTo(a) != 0) {
-				if (edges.get(node).contains(new Edge(a, null))) {
-					nodes.add(node);
+			if (node.compareTo(to) != 0) {
+				for (Edge<V, W> fromNode : edges.get(node)) {
+					if (fromNode.to.compareTo(to) == 0) {
+						nodes.add(fromNode.from);
+					}
 				}
 			}
 		}

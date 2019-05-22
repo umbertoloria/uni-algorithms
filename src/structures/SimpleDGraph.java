@@ -2,7 +2,7 @@ package structures;
 
 public class SimpleDGraph<T extends Comparable<T>> {
 
-	private DirectGraph<T, Object> graph = new DirectGraph<>();
+	private DirectGraph<T, Integer> graph = new DirectGraph<>();
 
 	public boolean exists(T node) {
 		return graph.exists(node);
@@ -21,7 +21,7 @@ public class SimpleDGraph<T extends Comparable<T>> {
 	}
 
 	public boolean link(T a, T b) {
-		return graph.link(a, b, null);
+		return graph.link(a, b, 0);
 	}
 
 	public Set<T> outgoing(T a) {

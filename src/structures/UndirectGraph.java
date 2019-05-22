@@ -1,9 +1,9 @@
 package structures;
 
-public class UndirectGraph<T extends Comparable<T>, V> extends DirectGraph<T, V> {
+public class UndirectGraph<T extends Comparable<T>, V extends Comparable<V>> extends DirectGraph<T, V> {
 
-	public boolean link(T a, T b, V value) {
-		return super.link(a, b, value) && super.link(b, a, value);
+	public boolean link(T from, T to, V weight) {
+		return super.link(from, to, weight) && super.link(to, from, weight);
 	}
 
 }
