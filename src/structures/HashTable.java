@@ -1,58 +1,53 @@
 package structures;
 
 @SuppressWarnings("unchecked")
-public class HashTable<K extends Comparable<K>, V> {
+public class HashTable<K, V> {
 
 	private static final int MINCAPACITY = 4;
-	private Set<HashItem<K, V>>[] data = new Set[MINCAPACITY];
+	private HashRow<K, V>[] data = new HashRow[MINCAPACITY];
 	private int count = 0;
 
 	public void put(K key, V value) {
 		int h = hash(key);
 		if (data[h] == null) {
-			data[h] = new Set<>();
-		}
-		if (data[h].add(new HashItem<>(key, value))) {
+			data[h] = new HashRow<>(key, value);
+			count++;
+		} else if (data[h].put(key, value)) {
 			count++;
 			ensureCapacity();
-		} else {
-			data[h].remove(new HashItem<>(key, null));
-			data[h].add(new HashItem<>(key, value));
 		}
 	}
 
 	private void ensureCapacity() {
 		if ((float) count / data.length > 0.7) {
-			Set<HashItem<K, V>>[] tmp = data;
+			HashRow<K, V>[] tmp = data;
 			count = 0;
-			data = new Set[data.length * 2];
-			for (Set<HashItem<K, V>> sublist : tmp) {
+			data = new HashRow[tmp.length * 2];
+			for (HashRow<K, V> sublist : tmp) {
 				if (sublist != null) {
-					for (HashItem<K, V> elem : sublist) {
-						put(elem.key, elem.value);
-					}
+					sublist.fill(this);
 				}
 			}
 		}
 	}
 
 	public V get(K key) {
-		Set<HashItem<K, V>> sublist = data[hash(key)];
+		HashRow<K, V> sublist = data[hash(key)];
 		if (sublist != null) {
-			HashItem<K, V> res = sublist.get(new HashItem<>(key, null));
-			if (res != null) {
-				return res.value;
-			}
+			return sublist.get(key);
+		} else {
+			return null;
 		}
-		return null;
 	}
 
 	public void remove(K key) {
 		int h = hash(key);
-		Set<HashItem<K, V>> sublist = data[h];
-		if (sublist != null) {
-			if (sublist.remove(new HashItem<>(key, null))) {
+		if (data[h] != null) {
+			if (data[h].remove(key)) {
 				count--;
+				if (data[h].empty()) {
+					data[h] = null;
+				}
 			}
 		}
 	}
@@ -76,26 +71,21 @@ public class HashTable<K extends Comparable<K>, V> {
 
 	public List<K> keys() {
 		List<K> keys = new LList<>();
-		for (Set<HashItem<K, V>> sublist : data) {
+		for (HashRow<K, V> sublist : data) {
 			if (sublist != null) {
-				for (HashItem<K, V> elem : sublist) {
-					keys.append(elem.key);
-				}
+				keys.expand(sublist.keys());
 			}
 		}
 		return keys;
 	}
 
 	public boolean hasKey(K key) {
-		Set<HashItem<K, V>> sublist = data[hash(key)];
+		HashRow<K, V> sublist = data[hash(key)];
 		if (sublist != null) {
-			for (HashItem<K, V> elem : sublist) {
-				if (elem.key.compareTo(key) == 0) {
-					return true;
-				}
-			}
+			return sublist.hasKey(key);
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 }

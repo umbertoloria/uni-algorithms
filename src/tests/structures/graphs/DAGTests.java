@@ -26,7 +26,7 @@ public class DAGTests {
 		g1.link(5, 6);
 		g1.link(5, 7);
 		g1.link(6, 7);
-		System.out.println("primo grafo");
+		System.out.println("Primo grafo (3)");
 		for (List<Integer> topologia : g1.topologie()) {
 			System.out.println(topologia);
 		}
@@ -42,7 +42,7 @@ public class DAGTests {
 		g2.link('e', 'b');
 		g2.link('c', 'd');
 		g2.link('d', 'e');
-		System.out.println("secondo grafo");
+		System.out.println("Secondo grafo (1)");
 		for (List<Character> topologia : g2.topologie()) {
 			System.out.println(topologia);
 		}
@@ -58,7 +58,7 @@ public class DAGTests {
 		g3.link('b', 'e');
 		g3.link('c', 'd');
 		g3.link('d', 'e');
-		System.out.println("terzo grafo");
+		System.out.println("Terzo grafo (3)");
 		for (List<Character> topologia : g3.topologie()) {
 			System.out.println(topologia);
 		}
@@ -76,7 +76,7 @@ public class DAGTests {
 		g4.link('a', 'd');
 		g4.link('d', 'e');
 		g4.link('e', 'f');
-		System.out.println("quarto grafo");
+		System.out.println("Quarto grafo (6)");
 		for (List<Character> topologia : g4.topologie()) {
 			System.out.println(topologia);
 		}

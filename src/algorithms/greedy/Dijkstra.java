@@ -62,9 +62,6 @@ public class Dijkstra {
 
 			// Aggiungiamo 'u' ai nodi esplorati.
 			explored.add(u);
-			// La distanza di un nodo 'x' viene modificata quando si trova un nuovo nodo 'y' entrante in 'x'
-			// che mostra la presenza di un nuovo cammino minimale. La nuova distanza sarà il costo del nuovo
-			// cammino, e il nodo 'y' diventerà il precedente di 'x'.
 
 			if (precedente != null) {
 				percorsi.append(new Edge<>(precedente, u, distanza));
@@ -74,6 +71,9 @@ public class Dijkstra {
 				break;
 			}
 
+			// La distanza di un nodo 'x' viene modificata quando si trova un nuovo nodo 'y' entrante in 'x'
+			// che mostra la presenza di un nuovo cammino minimale. La nuova distanza sarà il costo del nuovo
+			// cammino, e il nodo 'y' diventerà il precedente di 'x'.
 			for (V v : g.outgoing(u).difference(explored)) {
 				int distanzaV = heap.priority(new DijNode<>(v, null));
 				int possibileNuovaDistanza = distanza + g.weight(u, v);

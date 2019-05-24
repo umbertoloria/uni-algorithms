@@ -3,6 +3,7 @@ package tests.algorithms.greedy;
 import algorithms.greedy.Dijkstra;
 import structures.DirectGraph;
 import structures.Edge;
+import structures.UndirectGraph;
 
 public class DijkstraTests {
 
@@ -34,9 +35,48 @@ public class DijkstraTests {
 		return g;
 	}
 
+	private static UndirectGraph<Character, Integer> test2() {
+		UndirectGraph<Character, Integer> g = new UndirectGraph<>();
+		g.add('S');
+		g.add('A');
+		g.add('B');
+		g.add('D');
+		g.add('G');
+		g.add('H');
+		g.add('F');
+		g.add('E');
+		g.add('L');
+		g.add('J');
+		g.add('I');
+		g.add('C');
+		g.link('S', 'A', 7);
+		g.link('S', 'B', 1);
+		g.link('A', 'B', 3);
+		g.link('A', 'D', 4);
+		g.link('B', 'D', 4);
+		g.link('B', 'H', 2);
+		g.link('D', 'G', 6);
+		g.link('G', 'H', 4);
+		g.link('H', 'F', 2);
+		g.link('F', 'E', 2);
+		g.link('E', 'J', 2);
+		g.link('J', 'L', 2);
+		g.link('L', 'I', 5);
+		g.link('J', 'I', 5);
+		g.link('I', 'C', 2);
+		g.link('C', 'S', 3);
+		return g;
+	}
+
 	public static void main(String[] args) {
 		System.out.println("TEST 1");
-		for (Edge<Integer, Integer> path : Dijkstra.shortestPath(test1(), 1, 8)) {
+		show(test1(), 1, 8);
+		System.out.println("TEST 2");
+		show(test2(), 'S', 'E');
+	}
+
+	private static <T extends Comparable<T>> void show(DirectGraph<T, Integer> g, T s, T t) {
+		for (Edge path : Dijkstra.shortestPath(g, s, t)) {
 			System.out.println(path);
 		}
 		System.out.println();
