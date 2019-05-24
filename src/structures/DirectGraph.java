@@ -18,26 +18,26 @@ public class DirectGraph<V extends Comparable<V>, W extends Comparable<W>> {
 		return Set.fromList(edges.keys());
 	}
 
-	public Set<Edge<V, W>> edges() {
-		Set<Edge<V, W>> res = new Set<>();
+	public List<Edge<V, W>> edges() {
+		List<Edge<V, W>> res = new AList<>();
 		for (V from : edges.keys()) {
 			for (Edge<V, W> fromFrom : edges.get(from)) {
-				res.add(fromFrom);
+				res.append(fromFrom);
 			}
 		}
 		return res;
 	}
 
-//	public W weight(V from, V to) {
-//		if (exists(from) && exists(to)) {
-//			for (Edge<V, W> adj : edges.get(from)) {
-//				if (adj.to.compareTo(to) == 0) {
-//					return adj.weight;
-//				}
-//			}
-//		}
-//		return null;
-//	}
+	public W weight(V from, V to) {
+		if (exists(from) && exists(to)) {
+			for (Edge<V, W> adj : edges.get(from)) {
+				if (adj.to.compareTo(to) == 0) {
+					return adj.weight;
+				}
+			}
+		}
+		return null;
+	}
 
 //	public void remove (V destNode) {}
 
@@ -100,6 +100,7 @@ public class DirectGraph<V extends Comparable<V>, W extends Comparable<W>> {
 		return nodes;
 	}
 
+	/** Complexity: time O(m + n) */
 	public void dfs(V node) {
 		if (exists(node)) {
 			System.out.println("Depth First Search");
@@ -131,7 +132,7 @@ public class DirectGraph<V extends Comparable<V>, W extends Comparable<W>> {
 		}
 	}
 
-	/** Complexity: time O(2m + n) */
+	/** Complexity: time O(m + n) */
 	public void bfs(V node) {
 		if (exists(node)) {
 

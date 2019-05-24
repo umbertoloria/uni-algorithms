@@ -1,10 +1,10 @@
 package algorithms.huffman;
 
-import structures.MinHeap;
+import structures.MinHeapSet;
 
 public class Huffman {
 
-	private MinHeap<BNode> heap = new MinHeap<>();
+	private MinHeapSet<BNode> heap = new MinHeapSet<>();
 
 	public void add(char ch, int frequency) {
 		heap.insert(new BLeaf(frequency, ch));

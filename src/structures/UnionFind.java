@@ -11,20 +11,18 @@ public class UnionFind<T> {
 		}
 
 		private boolean contains(T value) {
-			if (first.value.equals(value)) {
-				return true;
-			} else {
-				for (Node tmp = first.next; tmp != null; tmp = tmp.next) {
-					if (tmp.value.equals(value)) {
-						return true;
-					}
+			for (Node tmp = first; tmp != null; tmp = tmp.next) {
+				if (tmp.value.equals(value)) {
+					return true;
 				}
-				return false;
 			}
+			return false;
 		}
 
 		private void expand(MiniSet second) {
-			last = last.next = second.first;
+//			last = last.next = second.first;
+			last.next = second.first;
+			last = second.last;
 		}
 
 		private void show() {

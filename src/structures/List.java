@@ -1,5 +1,7 @@
 package structures;
 
+import sorting.QuickSort;
+
 import java.lang.reflect.Array;
 import java.util.Iterator;
 
@@ -57,6 +59,10 @@ public abstract class List<T> implements Iterable<T> {
 			result.prepend(item);
 		}
 		return result;
+	}
+
+	public static <T extends Comparable<T>> void sort(List<T> list) {
+		QuickSort.quicksort(list, 0, list.size() - 1);
 	}
 
 	public abstract List<T> justReverse();

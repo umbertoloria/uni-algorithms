@@ -1,12 +1,12 @@
 package sorting;
 
-import structures.MinHeap;
+import structures.MinHeapSet;
 
 public class HeapSort {
 
 	/** Complexity: time O(n log n) and space O(n) */
 	public static <T extends Comparable<T>> void heapsort(T[] vect) {
-		MinHeap<T> heap = new MinHeap<>();
+		MinHeapSet<T> heap = new MinHeapSet<>();
 		for (T t : vect) {
 			heap.insert(t);
 		}

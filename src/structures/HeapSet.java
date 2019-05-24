@@ -1,37 +1,13 @@
 package structures;
 
 @SuppressWarnings("unchecked")
-class Heap<K extends Comparable<K>, T> {
-
-	private class HeapItem implements Comparable<HeapItem> {
-
-		private final K priority;
-		private final T value;
-
-		HeapItem(K priority, T value) {
-			this.priority = priority;
-			this.value = value;
-		}
-
-		public int compareTo(HeapItem o) {
-			return priority.compareTo(o.priority);
-		}
-
-		boolean has(T value) {
-			return this.value.equals(value);
-		}
-
-		public String toString() {
-			return "(" + priority + ") -> " + value;
-		}
-
-	}
+class HeapSet<T extends Comparable<T>> {
 
 	private int ORDER;
 	private Object[] data = new Object[200];
 	private int size = 0;
 
-	Heap(int order) {
+	HeapSet(int order) {
 		this.ORDER = order;
 	}
 
@@ -45,19 +21,19 @@ class Heap<K extends Comparable<K>, T> {
 
 	/** Complexity: time O(1) */
 	public T peek() {
-		return ((HeapItem) data[0]).value;
+		return (T) data[0];
 	}
 
 	/** Complexity: time O(log n) */
-	public void insert(K priority, T value) {
-		data[size] = new HeapItem(priority, value);
+	public void insert(T value) {
+		data[size] = value;
 		size++;
 		heapifyUp(size - 1);
 	}
 
 	/** Complexity: time O(log n) */
 	public T extract() {
-		T result = ((HeapItem) data[0]).value;
+		T result = (T) data[0];
 		size--;
 		data[0] = data[size];
 		heapifyDown(0);
@@ -66,26 +42,21 @@ class Heap<K extends Comparable<K>, T> {
 
 	private int indexOf(T value) {
 		for (int i = 0; i < size; i++) {
-			if (((HeapItem) data[i]).has(value)) {
+			if (value.compareTo((T) data[i]) == 0) {
 				return i;
 			}
 		}
 		return -1;
 	}
 
-	public K priority(T value) {
-		int index = indexOf(value);
-		if (index >= 0) {
-			return ((HeapItem) data[index]).priority;
-		} else {
-			return null;
-		}
+	public boolean contains(T value) {
+		return indexOf(value) >= 0;
 	}
 
-	public K remove(T value) {
+	public T remove(T value) {
 		int index = indexOf(value);
 		if (index >= 0) {
-			K result = ((HeapItem) data[index]).priority;
+			T result = (T) data[index];
 			size--;
 			data[index] = data[size];
 			heapifyUp(index);
@@ -97,8 +68,8 @@ class Heap<K extends Comparable<K>, T> {
 	}
 
 	private void heapifyUp(int index) {
-		while (hasParent(index) && parent(index).compareTo(((HeapItem) data[index])) * ORDER > 0) {
-			HeapItem tmp = ((HeapItem) data[index]);
+		while (hasParent(index) && parent(index).compareTo((T) data[index]) * ORDER > 0) {
+			T tmp = (T) data[index];
 			data[index] = parent(index);
 			data[getParentIndex(index)] = tmp;
 			index = getParentIndex(index);
@@ -111,8 +82,8 @@ class Heap<K extends Comparable<K>, T> {
 			if (hasRightChild(index) && rightChild(index).compareTo(leftChild(index)) * ORDER < 0) {
 				smallestChildIndex++;
 			}
-			if (((HeapItem) data[smallestChildIndex]).compareTo(((HeapItem) data[index])) * ORDER < 0) {
-				HeapItem tmp = ((HeapItem) data[index]);
+			if (((T) data[smallestChildIndex]).compareTo((T) data[index]) * ORDER < 0) {
+				T tmp = (T) data[index];
 				data[index] = data[smallestChildIndex];
 				data[smallestChildIndex] = tmp;
 				index = smallestChildIndex;
@@ -126,9 +97,9 @@ class Heap<K extends Comparable<K>, T> {
 		DSUtils.showThroughPositionsList(positionInfo(0, 1));
 	}
 
-	private List<Object[]> positionInfo(int indexNode, int level) {
+	private LList<Object[]> positionInfo(int indexNode, int level) {
 		if (0 <= indexNode && indexNode < size) {
-			List<Object[]> result = new LList<>();
+			LList<Object[]> result = new LList<>();
 			result.expand(positionInfo(getLeftChildIndex(indexNode), level + 1));
 			result.append(new Object[]{level, data[indexNode]});
 			result.expand(positionInfo(getRightChildIndex(indexNode), level + 1));
@@ -162,24 +133,16 @@ class Heap<K extends Comparable<K>, T> {
 		return getParentIndex(index) >= 0;
 	}
 
-	private HeapItem leftChild(int index) {
-		return ((HeapItem) data[getLeftChildIndex(index)]);
+	private T leftChild(int index) {
+		return (T) data[getLeftChildIndex(index)];
 	}
 
-	private HeapItem rightChild(int index) {
-		return ((HeapItem) data[getRightChildIndex(index)]);
+	private T rightChild(int index) {
+		return (T) data[getRightChildIndex(index)];
 	}
 
-	private HeapItem parent(int index) {
-		return ((HeapItem) data[getParentIndex(index)]);
-	}
-
-	public String toString() {
-		AList<T> tmp = new AList<>();
-		for (int i = 0; i < size; i++) {
-			tmp.append((T) data[i]);
-		}
-		return tmp.toString();
+	private T parent(int index) {
+		return (T) data[getParentIndex(index)];
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 class DSUtils {
 
-	static void showThroughPositionsList(LList<Object[]> lls) {
+	static void showThroughPositionsList(List<Object[]> lls) {
 		int mm = (int) lls.get(0)[0];
 		for (Object[] a : lls) {
 			mm = Math.max(mm, (int) a[0]);
@@ -19,7 +19,6 @@ class DSUtils {
 			}
 			System.out.println();
 		}
-		System.out.println();
 	}
 
 	static String makeString(Iterator it) {

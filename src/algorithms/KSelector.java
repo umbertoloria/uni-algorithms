@@ -2,8 +2,8 @@ package algorithms;
 
 import structures.AList;
 import structures.List;
-import structures.MaxHeap;
-import structures.MinHeap;
+import structures.MaxHeapSet;
+import structures.MinHeapSet;
 
 import java.lang.reflect.Array;
 
@@ -21,7 +21,7 @@ public class KSelector<T extends Comparable<T>> {
 		if (elements.size() <= k) {
 			return elements.toArray(app);
 		} else {
-			MaxHeap<T> heap = new MaxHeap<>();
+			MaxHeapSet<T> heap = new MaxHeapSet<>();
 			for (int i = 0; i < k; i++) {
 				heap.insert(elements.get(i));
 			}
@@ -46,7 +46,7 @@ public class KSelector<T extends Comparable<T>> {
 		if (elements.size() <= k) {
 			return elements.toArray(app);
 		} else {
-			MinHeap<T> heap = new MinHeap<>();
+			MinHeapSet<T> heap = new MinHeapSet<>();
 			for (int i = 0; i < k; i++) {
 				heap.insert(elements.get(i));
 			}

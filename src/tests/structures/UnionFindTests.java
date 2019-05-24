@@ -8,19 +8,27 @@ public class UnionFindTests {
 		UnionFind<Integer> uf = new UnionFind<>();
 		uf.addSet(10);
 		uf.addSet(20);
+		uf.addSet(21);
 		uf.addSet(30);
+		uf.addSet(31);
+		uf.addSet(32);
+		uf.addSet(33);
 		status(uf);
 		if (uf.union(10, 30)) {
 			System.out.println("10 united with 30");
 		}
-		if (uf.union(10, 20)) {
-			System.out.println("10 united with 20");
+		if (uf.union(20, 21)) {
+			System.out.println("20 united with 21");
 		}
-		if (!uf.union(20, 30)) {
-			System.out.println("20 was already united with 30");
+		if (uf.union(30, 31)) {
+			System.out.println("30 united with 31");
 		}
-		uf.union(10, 20);
-		uf.union(20, 30);
+		if (uf.union(31, 32)) {
+			System.out.println("31 united with 32");
+		}
+		if (uf.union(33, 31)) {
+			System.out.println("33 united with 31");
+		}
 		status(uf);
 	}
 
