@@ -1,12 +1,12 @@
 package tests.structures.graphs;
 
 import structures.List;
-import structures.SimpleDGraph;
+import structures.SimpleGraph;
 
 public class DAGTests {
 
 	public static void main(String[] args) {
-		SimpleDGraph<Integer> g1 = new SimpleDGraph<>();
+		SimpleGraph<Integer> g1 = new SimpleGraph<>();
 		g1.add(1);
 		g1.add(2);
 		g1.add(3);
@@ -31,7 +31,7 @@ public class DAGTests {
 			System.out.println(topologia);
 		}
 		System.out.println();
-		SimpleDGraph<Character> g2 = new SimpleDGraph<>();
+		SimpleGraph<Character> g2 = new SimpleGraph<>();
 		g2.add('a');
 		g2.add('b');
 		g2.add('c');
@@ -47,7 +47,7 @@ public class DAGTests {
 			System.out.println(topologia);
 		}
 		System.out.println();
-		SimpleDGraph<Character> g3 = new SimpleDGraph<>();
+		SimpleGraph<Character> g3 = new SimpleGraph<>();
 		g3.add('b');
 		g3.add('a');
 		g3.add('c');
@@ -63,7 +63,7 @@ public class DAGTests {
 			System.out.println(topologia);
 		}
 		System.out.println();
-		SimpleDGraph<Character> g4 = new SimpleDGraph<>();
+		SimpleGraph<Character> g4 = new SimpleGraph<>();
 		g4.add('a');
 		g4.add('b');
 		g4.add('c');

@@ -6,16 +6,13 @@ public class Prim {
 
 	private static class PrimNode<V> {
 
-		private V node, closest;
+		private V node, previous;
+		private Integer distancePrevNode;
 
-		PrimNode(V node) {
+		PrimNode(V node, V previous, Integer distancePrevNode) {
 			this.node = node;
-			this.closest = null;
-		}
-
-		PrimNode(V node, V closest) {
-			this.node = node;
-			this.closest = closest;
+			this.previous = previous;
+			this.distancePrevNode = distancePrevNode;
 		}
 
 		public boolean equals(Object obj) {
@@ -25,33 +22,47 @@ public class Prim {
 				return false;
 			}
 		}
+
 	}
 
 	/** Complexity: time O(m log n) */
-	public static <V extends Comparable<V>> List<Edge<V, Integer>> mst(UndirectGraph<V, Integer> g, V s) {
+	public static <V> List<Edge<V, Integer>> mst(UndirectGraph<V, Integer> g, V s) {
 		assert g.exists(s);
-		MinHeap<Integer, PrimNode<V>> heap = new MinHeap<>();
+
+		MinHeap<Integer, PrimNode<V>> coda = new MinHeap<>();
 		for (V node : g.nodes()) {
 			if (!node.equals(s)) {
-				heap.insert(Integer.MAX_VALUE, new PrimNode<>(node));
+				coda.insert(Integer.MAX_VALUE, new PrimNode<>(node, null, null));
 			}
 		}
-		heap.insert(0, new PrimNode<>(s));
-		Set<V> explored = new Set<>();
+		coda.insert(0, new PrimNode<>(s, null, null));
+		// 'partenza' sarà il primo ad essere processato.
+
+		// Explored conterrà i nodi già processati.
+		List<V> explored = new LList<>();
+
+		// MST conterrà tutti gli archi del Minimum Spanning Tree.
 		List<Edge<V, Integer>> mst = new AList<>();
-		while (!heap.empty()) {
-			PrimNode<V> pu = heap.extract();
+
+		// Processiamo ogni volta il nodo più vicino.
+		while (!coda.empty()) {
+
+			PrimNode<V> pu = coda.extract();
 			V u = pu.node;
-			explored.add(u);
-			for (V v : g.outgoing(u).difference(explored)) {
-				int newPossibleWeight = g.weight(u, v);
-				if (heap.priority(new PrimNode<>(v)) > newPossibleWeight) {
-					heap.remove(new PrimNode<>(v));
-					heap.insert(newPossibleWeight, new PrimNode<>(v, u));
+			explored.append(u);
+
+			for (Edge<V, Integer> edge : g.outgoing(u)) {
+				if (!explored.contains(edge.to)) {
+					PrimNode<V> handle = new PrimNode<>(edge.to, null, null);
+					// Processo tutti gli archi che vanno verso nodi non ancora esplorati, aggiornando i loro costi.
+					if (edge.weight < coda.priority(handle)) {
+						coda.remove(handle);
+						coda.insert(edge.weight, new PrimNode<>(edge.to, u, edge.weight));
+					}
 				}
 			}
-			if (pu.closest != null) {
-				mst.append(new Edge<>(pu.closest, u, g.weight(pu.closest, u)));
+			if (pu.previous != null) {
+				mst.append(new Edge<>(pu.previous, u, pu.distancePrevNode));
 			}
 		}
 		return mst;

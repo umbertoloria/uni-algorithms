@@ -23,8 +23,8 @@ public class ListTests {
 
 		List<Integer> b = new LList<>();
 		b.append(5);
-		b.append(4);
 		b.append(2);
+		b.append(4);
 		System.out.println("list b        : " + b);
 
 		a.expand(b);
@@ -35,15 +35,15 @@ public class ListTests {
 		System.out.println("c expand frm b: " + c);
 		c.prepend(7);
 		System.out.println("c prepend 7   : " + c);
-		if (c.contains(7)) {
-			System.out.println("c search 7");
-		}
+		System.out.println("c indexOf 7   : " + c.indexOf(7));
 		List<Integer> r = c.createReverse();
-		System.out.println("r crt_rvr c   : " + r);
-		if (c.contains(7)) {
-			System.out.println("r search 7");
-		}
+		System.out.println("r cret_revr c : " + r);
+		System.out.println("r indexOf 7   : " + r.indexOf(7));
 		System.out.println("r to set      : " + Set.fromList(r));
+		System.out.println("r indexOf 70  : " + r.indexOf(70));
+		System.out.println("c show        : " + c);
+		System.out.println("b show        : " + b);
+		System.out.println("c exclude b   : " + c.exclude(b));
 	}
 
 }

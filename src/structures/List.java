@@ -33,11 +33,23 @@ public abstract class List<T> implements Iterable<T> {
 
 	public abstract void set(int index, T value);
 
-	public abstract void expand(List<T> external);
+	public abstract List<T> expand(List<T> external);
 
 	// Removal
 
 	public abstract void remove(int index);
+
+	public List<T> exclude(List<T> external) {
+		if (!external.empty()) {
+			for (T del : external) {
+				int index = indexOf(del);
+				if (index >= 0) {
+					remove(index);
+				}
+			}
+		}
+		return this;
+	}
 
 	// Controls
 
@@ -49,9 +61,17 @@ public abstract class List<T> implements Iterable<T> {
 		return size;
 	}
 
-	public abstract boolean contains(T value);
+	public boolean contains(T value) {
+		return indexOf(value) >= 0;
+	}
+
+	public abstract int indexOf(T value);
 
 	// Utils
+
+	public static <T extends Comparable<T>> void sort(List<T> list) {
+		QuickSort.quicksort(list, 0, list.size() - 1);
+	}
 
 	public final AList<T> createReverse() {
 		AList<T> result = new AList<>();
@@ -59,10 +79,6 @@ public abstract class List<T> implements Iterable<T> {
 			result.prepend(item);
 		}
 		return result;
-	}
-
-	public static <T extends Comparable<T>> void sort(List<T> list) {
-		QuickSort.quicksort(list, 0, list.size() - 1);
 	}
 
 	public abstract List<T> justReverse();

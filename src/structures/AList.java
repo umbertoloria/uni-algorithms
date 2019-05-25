@@ -38,8 +38,9 @@ public class AList<T> extends List<T> {
 		}
 	}
 
-	public void expand(List<T> external) {
-		if (external.size() > 0) {
+	/** Complexity: time O(m) */
+	public List<T> expand(List<T> external) {
+		if (!external.empty()) {
 			Iterator<T> it = external.iterator();
 			int i = size();
 			while (it.hasNext()) {
@@ -47,6 +48,7 @@ public class AList<T> extends List<T> {
 				increaseSize();
 			}
 		}
+		return this;
 	}
 
 	public void remove(int index) {
@@ -62,13 +64,13 @@ public class AList<T> extends List<T> {
 	}
 
 	/** Complexity: time O(n) */
-	public boolean contains(T value) {
-		for (Object item : data) {
-			if (item.equals(value)) {
-				return true;
+	public int indexOf(T value) {
+		for (int i = 0; i < size(); i++) {
+			if (get(i).equals(value)) {
+				return i;
 			}
 		}
-		return false;
+		return -1;
 	}
 
 	public AList<T> justReverse() {

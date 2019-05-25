@@ -38,7 +38,6 @@ public class QuickSort {
 		return j;
 	}
 
-	/** Complexity: time O(n log n) */
 	public static <T extends Comparable<T>> void quicksort(List<T> list, int p, int q) {
 		if (p < q) {
 			int gap = partition(list, p, q);
@@ -47,7 +46,6 @@ public class QuickSort {
 		}
 	}
 
-	/** Complexity: time O(n) */
 	private static <T extends Comparable<T>> int partition(List<T> list, int p, int q) {
 		T pivot = list.get((p + q) / 2);
 		int i = p;
@@ -62,7 +60,7 @@ public class QuickSort {
 			if (i < j) {
 				T tmp = list.get(i);
 				list.remove(i);
-				list.set(i, list.get(j-1));
+				list.set(i, list.get(j - 1));
 				list.remove(j);
 				list.set(j, tmp);
 				j--;

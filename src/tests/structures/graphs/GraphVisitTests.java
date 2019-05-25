@@ -1,13 +1,11 @@
 package tests.structures.graphs;
 
-import structures.DirectGraph;
+import structures.SimpleGraph;
 
 public class GraphVisitTests {
 
 	public static void main(String[] args) {
-
-		var g = new DirectGraph<Integer, Integer>();
-
+		var g = new SimpleGraph<Integer>();
 		g.add(1);
 		g.add(2);
 		g.add(3);
@@ -16,27 +14,23 @@ public class GraphVisitTests {
 		g.add(6);
 		g.add(7);
 		g.add(8);
+		g.link(1, 2);
+		g.link(1, 3);
+		g.link(2, 3);
+		g.link(2, 4);
+		g.link(2, 5);
+		g.link(3, 5);
+		g.link(3, 7);
+		g.link(3, 8);
+		g.link(4, 5);
+		g.link(5, 6);
+		g.link(7, 8);
 
-		g.link(1, 2, 0);
-		g.link(1, 3, 0);
-
-		g.link(2, 3, 0);
-		g.link(2, 4, 0);
-		g.link(2, 5, 0);
-
-		g.link(3, 5, 0);
-		g.link(3, 7, 0);
-		g.link(3, 8, 0);
-
-		g.link(4, 5, 0);
-
-		g.link(5, 6, 0);
-
-		g.link(7, 8, 0);
-
+		System.out.println("DFS");
 		g.dfs(1);
 		System.out.println();
 
+		System.out.println("BFS");
 		g.bfs(1);
 		System.out.println();
 

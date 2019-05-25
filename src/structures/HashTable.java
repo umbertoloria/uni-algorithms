@@ -54,7 +54,7 @@ public class HashTable<K, V> {
 
 	private int hash(K key) {
 		int capacity = data.length;
-		int hash = key.hashCode() % data.length;
+		int hash = key.hashCode() % capacity;
 		while (hash < 0) {
 			hash = capacity + hash;
 		}

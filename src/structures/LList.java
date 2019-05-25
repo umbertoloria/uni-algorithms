@@ -28,21 +28,22 @@ public class LList<T> extends List<T> {
 		}
 	}
 
-	public void expand(List<T> external) {
-		if (external.size() > 0) {
+	/** Complexity: time O(m) */
+	public List<T> expand(List<T> external) {
+		if (!external.empty()) {
 			Iterator<T> it = external.iterator();
-			Node<T> tail;
 			if (empty()) {
 				head = new Node<>(it.next());
 				increaseSize();
 			}
-			tail = head.jump(size() - 1);
+			Node<T> tail = head.jump(size() - 1);
 			while (it.hasNext()) {
 				tail.next = new Node<>(it.next());
 				tail = tail.next;
 				increaseSize();
 			}
 		}
+		return this;
 	}
 
 	public void remove(int index) {
@@ -60,15 +61,17 @@ public class LList<T> extends List<T> {
 	}
 
 	/** Complexity: time O(n) */
-	public boolean contains(T value) {
+	public int indexOf(T value) {
 		Node<T> app = head;
+		int i = 0;
 		while (app != null) {
-			if (app.value == value) {
-				return true;
+			if (app.value.equals(value)) {
+				return i;
 			}
 			app = app.next;
+			i++;
 		}
-		return false;
+		return -1;
 	}
 
 	public LList<T> justReverse() {

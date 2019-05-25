@@ -35,7 +35,7 @@ public class Mattonelle {
 		m[0] = 0;
 		for (int i = 1; i <= n; i++) {
 			int v = NONE;
-			for (Integer matt : lengths) {
+			for (int matt : lengths) {
 				if (i == matt) {
 					v = 0;
 					break;
