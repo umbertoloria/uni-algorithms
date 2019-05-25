@@ -7,7 +7,7 @@ import structures.UndirectGraph;
 
 public class DijkstraTests {
 
-	private static DirectGraph<Integer, Integer> test1() {
+	public static DirectGraph<Integer, Integer> test1() {
 		DirectGraph<Integer, Integer> g = new DirectGraph<>();
 		g.add(1);
 		g.add(2);
@@ -35,7 +35,7 @@ public class DijkstraTests {
 		return g;
 	}
 
-	private static UndirectGraph<Character, Integer> test2() {
+	public static UndirectGraph<Character, Integer> test2() {
 		UndirectGraph<Character, Integer> g = new UndirectGraph<>();
 		g.add('S');
 		g.add('A');
@@ -75,8 +75,8 @@ public class DijkstraTests {
 		show(test2(), 'S', 'E');
 	}
 
-	private static <T extends Comparable<T>> void show(DirectGraph<T, Integer> g, T s, T t) {
-		for (Edge path : Dijkstra.shortestPath(g, s, t)) {
+	private static <T> void show(DirectGraph<T, Integer> g, T s, T t) {
+		for (Edge<T, Integer> path : Dijkstra.shortestPath(g, s, t)) {
 			System.out.println(path);
 		}
 		System.out.println();

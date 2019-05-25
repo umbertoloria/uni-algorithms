@@ -65,7 +65,7 @@ public class MSTTests {
 		manage(test2(), 1);
 	}
 
-	private static <T extends Comparable<T>> void manage(UndirectGraph<T, Integer> graph, T s) {
+	private static <T> void manage(UndirectGraph<T, Integer> graph, T s) {
 		int weight = 0;
 		System.out.println("Algoritmo di Prim");
 		for (Edge<T, Integer> edge : Prim.mst(graph, s)) {
