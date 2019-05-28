@@ -33,6 +33,7 @@ public class BellmanFord {
 
 	}
 
+	/** Complexity: time O(mn) and space O(n^2) */
 	@SuppressWarnings("unchecked")
 	public static <V> List<Edge<V, Integer>> shortestPath(DirectGraph<V, Integer> g, V partenza, V destinazione) {
 		List<V> nodes = g.nodes();

@@ -20,26 +20,24 @@ public class UnionFind<T> {
 		}
 
 		private void expand(MiniSet second) {
-//			last = last.next = second.first;
-			last.next = second.first;
-			last = second.last;
-		}
-
-		private void show() {
-			for (Node tmp = first; tmp != null; tmp = tmp.next) {
-				System.out.println(tmp.value);
+			for (Node del = second.first; del != null; del = del.next) {
+				Node i = first;
+				while (i != null && !i.value.equals(del.value)) {
+					i = i.next;
+				}
+				if (i == null) {
+					last = last.next = new Node(del.value);
+				}
 			}
 		}
 
 		public String toString() {
 			StringBuilder res = new StringBuilder("[");
-			for (Node tmp = first; tmp != null; tmp = tmp.next) {
+			for (Node tmp = first; tmp != last; tmp = tmp.next) {
 				res.append(tmp.value);
 				res.append(", ");
 			}
-			if (res.length() > 1) {
-				res.delete(res.length() - 2, res.length());
-			}
+			res.append(last.value);
 			res.append("]");
 			return res.toString();
 		}
@@ -48,8 +46,8 @@ public class UnionFind<T> {
 
 	private class Node {
 
-		private Node next;
 		private T value;
+		private Node next;
 
 		Node(T value) {
 			this.value = value;
@@ -96,15 +94,6 @@ public class UnionFind<T> {
 			return true;
 		} else {
 			return false;
-		}
-	}
-
-	public void show() {
-		System.out.println("There are " + sets.size() + " sets");
-		int i = 1;
-		for (MiniSet set : sets) {
-			System.out.println("Set number " + i++);
-			set.show();
 		}
 	}
 
