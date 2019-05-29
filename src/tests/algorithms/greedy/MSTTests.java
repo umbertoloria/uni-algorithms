@@ -17,18 +17,18 @@ public class MSTTests {
 		g.add('f');
 		g.add('g');
 		g.add('h');
-		g.link('s', 'b', 4);
-		g.link('s', 'h', 8);
-		g.link('b', 'c', 8);
-		g.link('b', 'h', 11);
-		g.link('c', 'd', 7);
-		g.link('c', 'f', 4);
-		g.link('c', 'h', 6);
-		g.link('d', 'f', 14);
-		g.link('d', 'e', 9);
-		g.link('e', 'f', 10);
-		g.link('f', 'g', 2);
-		g.link('g', 'h', 1);
+		g.link(new Edge<>('s', 'b', 4));
+		g.link(new Edge<>('s', 'h', 8));
+		g.link(new Edge<>('b', 'c', 8));
+		g.link(new Edge<>('b', 'h', 11));
+		g.link(new Edge<>('c', 'd', 7));
+		g.link(new Edge<>('c', 'f', 4));
+		g.link(new Edge<>('c', 'h', 6));
+		g.link(new Edge<>('d', 'f', 14));
+		g.link(new Edge<>('d', 'e', 9));
+		g.link(new Edge<>('e', 'f', 10));
+		g.link(new Edge<>('f', 'g', 2));
+		g.link(new Edge<>('g', 'h', 1));
 		return g;
 	}
 
@@ -42,21 +42,21 @@ public class MSTTests {
 		g.add(3);
 		g.add(2);
 		g.add(1);
-		g.link(1, 2, 9);
-		g.link(1, 6, 14);
-		g.link(1, 7, 15);
-		g.link(2, 3, 24);
-		g.link(3, 4, 6);
-		g.link(3, 5, 2);
-		g.link(3, 6, 18);
-		g.link(3, 8, 19);
-		g.link(4, 5, 11);
-		g.link(4, 8, 7);
-		g.link(5, 6, 30);
-		g.link(5, 7, 20);
-		g.link(5, 8, 16);
-		g.link(6, 7, 5);
-		g.link(7, 8, 44);
+		g.link(new Edge<>(1, 2, 9));
+		g.link(new Edge<>(1, 7, 15));
+		g.link(new Edge<>(1, 6, 14));
+		g.link(new Edge<>(2, 3, 24));
+		g.link(new Edge<>(3, 4, 6));
+		g.link(new Edge<>(3, 5, 2));
+		g.link(new Edge<>(3, 6, 18));
+		g.link(new Edge<>(3, 8, 19));
+		g.link(new Edge<>(4, 5, 11));
+		g.link(new Edge<>(4, 8, 7));
+		g.link(new Edge<>(5, 6, 30));
+		g.link(new Edge<>(5, 7, 20));
+		g.link(new Edge<>(5, 8, 16));
+		g.link(new Edge<>(6, 7, 5));
+		g.link(new Edge<>(7, 8, 44));
 		return g;
 	}
 
@@ -76,7 +76,7 @@ public class MSTTests {
 		System.out.println();
 		weight = 0;
 		System.out.println("Algoritmo di Kruskal");
-		for (Edge<T, Integer> edge : Kruskal.mst(graph, s)) {
+		for (Edge<T, Integer> edge : Kruskal.mst(graph)) {
 			System.out.println(edge);
 			weight += edge.weight;
 		}

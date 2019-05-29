@@ -1,6 +1,6 @@
 package structures;
 
-public class DirectGraph<V, W extends Comparable<W>> {
+public class DirectGraph<V, W extends Comparable<W>> extends Graph<V, W> {
 
 	private HashTable<V, LList<Edge<V, W>>> edges = new HashTable<>();
 
@@ -28,24 +28,24 @@ public class DirectGraph<V, W extends Comparable<W>> {
 		return res;
 	}
 
-	public boolean link(V from, V to, W weight) {
-		if (exists(from) && exists(to) && !from.equals(to)) {
-			LList<Edge<V, W>> adjs = edges.get(from);
+	public boolean link(Edge<V, W> edge) {
+		if (exists(edge.from) && exists(edge.to)) {
+			LList<Edge<V, W>> adjs = edges.get(edge.from);
 			int i = 0;
-			while (i < adjs.size() && !adjs.get(i).to.equals(to)) {
+			while (i < adjs.size() && !adjs.get(i).to.equals(edge.to)) {
 				i++;
 			}
 			if (i < adjs.size()) {
 				adjs.remove(i);
 			}
-			adjs.append(new Edge<>(from, to, weight));
+			adjs.append(edge);
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public List<Edge<V, W>> outgoing(V from) {
+	public List<Edge<V, W>> outgoings(V from) {
 		List<Edge<V, W>> result = new LList<>();
 		if (exists(from)) {
 			result.expand(edges.get(from));

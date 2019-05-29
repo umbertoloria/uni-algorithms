@@ -51,7 +51,7 @@ public class Prim {
 			V u = pu.node;
 			explored.append(u);
 
-			for (Edge<V, Integer> edge : g.outgoing(u)) {
+			for (Edge<V, Integer> edge : g.outgoings(u)) {
 				if (!explored.contains(edge.to)) {
 					PrimNode<V> handle = new PrimNode<>(edge.to, null, null);
 					// Processo tutti gli archi che vanno verso nodi non ancora esplorati, aggiornando i loro costi.

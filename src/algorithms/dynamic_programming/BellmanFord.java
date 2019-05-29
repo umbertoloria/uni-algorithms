@@ -58,7 +58,7 @@ public class BellmanFord {
 
 					val = m[i - 1].get(v).distance;
 
-					for (Edge<V, Integer> edge : g.outgoing(v)) {
+					for (Edge<V, Integer> edge : g.outgoings(v)) {
 						int prevDistance = m[i - 1].get(edge.to).distance;
 						if (prevDistance < Integer.MAX_VALUE && val > prevDistance + edge.weight) {
 							last = edge;

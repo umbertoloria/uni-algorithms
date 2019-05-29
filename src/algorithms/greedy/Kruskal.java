@@ -5,8 +5,7 @@ import structures.*;
 public class Kruskal {
 
 	/** Complexity: time O(m log n) */
-	public static <V, W extends Comparable<W>> List<Edge<V, W>> mst(UndirectGraph<V, W> g, V s) {
-		assert g.exists(s);
+	public static <V, W extends Comparable<W>> List<Edge<V, W>> mst(UndirectGraph<V, W> g) {
 		UnionFind<V> uf = new UnionFind<>();
 		for (V node : g.nodes()) {
 			uf.addSet(node);

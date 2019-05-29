@@ -15,16 +15,16 @@ public class BellmanFordTests {
 		g.add('d');
 		g.add('e');
 		g.add('t');
-		g.link('a', 'b', -4);
-		g.link('a', 't', -3);
-		g.link('b', 'd', -1);
-		g.link('b', 'e', -2);
-		g.link('c', 'b', 8);
-		g.link('c', 't', 3);
-		g.link('d', 'a', 6);
-		g.link('d', 't', 4);
-		g.link('e', 'c', -3);
-		g.link('e', 't', 2);
+		g.link(new Edge<>('a', 'b', -4));
+		g.link(new Edge<>('a', 't', -3));
+		g.link(new Edge<>('b', 'd', -1));
+		g.link(new Edge<>('b', 'e', -2));
+		g.link(new Edge<>('c', 'b', 8));
+		g.link(new Edge<>('c', 't', 3));
+		g.link(new Edge<>('d', 'a', 6));
+		g.link(new Edge<>('d', 't', 4));
+		g.link(new Edge<>('e', 'c', -3));
+		g.link(new Edge<>('e', 't', 2));
 		return g;
 	}
 

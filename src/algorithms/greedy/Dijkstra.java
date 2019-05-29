@@ -55,7 +55,7 @@ public class Dijkstra {
 			if (!corrente.equals(destinazione)) {
 
 				// Controllo tutti gli archi uscenti da 'corrente' ed entranti in nodi non ancora esplorati.
-				for (Edge<V, Integer> edge : g.outgoing(corrente)) {
+				for (Edge<V, Integer> edge : g.outgoings(corrente)) {
 					DijNode<V> handle = new DijNode<>(edge.to, null, null);
 					if (!explored.contains(handle)) {
 						// Questo arco potrebbe costituire un percorso meno costoso verso il suo nodo entrante.
