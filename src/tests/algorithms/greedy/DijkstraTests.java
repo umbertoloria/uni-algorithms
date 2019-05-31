@@ -3,6 +3,7 @@ package tests.algorithms.greedy;
 import algorithms.greedy.Dijkstra;
 import structures.DirectGraph;
 import structures.Edge;
+import structures.Graph;
 import structures.UndirectGraph;
 
 public class DijkstraTests {
@@ -75,7 +76,7 @@ public class DijkstraTests {
 		show(test2(), 'S', 'E');
 	}
 
-	private static <T> void show(DirectGraph<T, Integer> g, T s, T t) {
+	private static <T> void show(Graph<T, Integer> g, T s, T t) {
 		for (Edge<T, Integer> path : Dijkstra.shortestPath(g, s, t)) {
 			System.out.println(path);
 		}

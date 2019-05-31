@@ -26,7 +26,7 @@ public class Dijkstra {
 	}
 
 	/** Complexity: time O(m log n) */
-	public static <V> List<Edge<V, Integer>> shortestPath(DirectGraph<V, Integer> g, V partenza, V destinazione) {
+	public static <V> List<Edge<V, Integer>> shortestPath(Graph<V, Integer> g, V partenza, V destinazione) {
 
 		assert g.exists(partenza);
 		assert g.exists(destinazione);

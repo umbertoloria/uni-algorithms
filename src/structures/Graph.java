@@ -18,7 +18,9 @@ public abstract class Graph<V, W extends Comparable<W>> {
 		HashTable<V, Integer> partitions = new HashTable<>();
 		int i = 0;
 		for (V node : nodes()) {
-			componenteConnessa(node, partitions, i++);
+			if (componenteConnessa(node, partitions, i)) {
+				i++;
+			}
 		}
 		List<List<V>> result = new AList<>();
 		for (V node : partitions.keys()) {
@@ -29,18 +31,21 @@ public abstract class Graph<V, W extends Comparable<W>> {
 				for (int j = result.size(); j <= part; j++) {
 					result.append(new AList<>());
 				}
-				result.get(result.size() - 1).append(node);
+				result.get(part).append(node);
 			}
 		}
 		return result;
 	}
 
-	private void componenteConnessa(V node, HashTable<V, Integer> partitions, int id) {
+	private boolean componenteConnessa(V node, HashTable<V, Integer> partitions, int id) {
 		if (!partitions.hasKey(node)) {
 			partitions.put(node, id);
 			for (Edge<V, W> edge : outgoings(node)) {
 				componenteConnessa(edge.to, partitions, id);
 			}
+			return true;
+		} else {
+			return false;
 		}
 	}
 

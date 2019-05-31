@@ -3,6 +3,7 @@ package tests.algorithms.dynamic_programming;
 import algorithms.dynamic_programming.BellmanFord;
 import structures.DirectGraph;
 import structures.Edge;
+import structures.Graph;
 import tests.algorithms.greedy.DijkstraTests;
 
 public class BellmanFordTests {
@@ -37,7 +38,7 @@ public class BellmanFordTests {
 		show(test3(), 'a', 't');
 	}
 
-	private static <T> void show(DirectGraph<T, Integer> g, T s, T t) {
+	private static <T> void show(Graph<T, Integer> g, T s, T t) {
 		for (Edge<T, Integer> path : BellmanFord.shortestPath(g, s, t)) {
 			System.out.println(path);
 		}
