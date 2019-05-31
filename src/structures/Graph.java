@@ -14,41 +14,34 @@ public abstract class Graph<V, W extends Comparable<W>> {
 
 	public abstract List<Edge<V, W>> outgoings(V from);
 
-	public List<List<V>> partitions() {
-		List<List<V>> partitions = new LList<>();
+	public List<List<V>> componentiConnesse() {
+		HashTable<V, Integer> partitions = new HashTable<>();
+		int i = 0;
 		for (V node : nodes()) {
-			boolean notYetSeen = true;
-			for (List<V> partition : partitions) {
-				if (partition.contains(node)) {
-					notYetSeen = false;
-					break;
+			componenteConnessa(node, partitions, i++);
+		}
+		List<List<V>> result = new AList<>();
+		for (V node : partitions.keys()) {
+			int part = partitions.get(node);
+			if (part < result.size()) {
+				result.get(part).append(node);
+			} else {
+				for (int j = result.size(); j <= part; j++) {
+					result.append(new AList<>());
 				}
-			}
-			if (notYetSeen) {
-				List<V> nuova = new LList<>();
-				nuova.expand(conn(node, new AList<>()));
-				partitions.append(nuova);
+				result.get(result.size() - 1).append(node);
 			}
 		}
-		return partitions;
+		return result;
 	}
 
-	private List<V> conn(V node, List<V> explored) {
-		List<V> res = new AList<>();
-		if (exists(node)) {
-			res.append(node);
-			for (Edge<V, W> outgoing : outgoings(node)) {
-				if (!explored.contains(outgoing.to)) {
-					List<V> exp2 = new AList<>();
-					for (V v : explored) {
-						exp2.append(v);
-					}
-					exp2.append(node);
-					res.expand(conn(outgoing.to, exp2));
-				}
+	private void componenteConnessa(V node, HashTable<V, Integer> partitions, int id) {
+		if (!partitions.hasKey(node)) {
+			partitions.put(node, id);
+			for (Edge<V, W> edge : outgoings(node)) {
+				componenteConnessa(edge.to, partitions, id);
 			}
 		}
-		return res;
 	}
 
 }

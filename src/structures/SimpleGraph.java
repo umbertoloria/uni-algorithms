@@ -68,10 +68,7 @@ public class SimpleGraph<V> extends Graph<V, Integer> {
 		}
 		List<List<V>> totalTopologies = new LList<>();
 		for (V t : uscentiEsclusivi) {
-			List<List<V>> partialTopologies = topologie(t, new LList<>());
-			if (partialTopologies != null) {
-				totalTopologies.expand(partialTopologies);
-			}
+			totalTopologies.expand(topologie(t, new LList<>()));
 		}
 		return totalTopologies;
 	}
@@ -84,16 +81,14 @@ public class SimpleGraph<V> extends Graph<V, Integer> {
 		List<V> senzaEntranti = new AList<>();
 		for (V node : rimanenti) {
 			List<Edge<V, Integer>> incomings = incomings(node);
+			// Rimuovo gli archi entranti in 'node' che provengono dai nodi già visitati.
 			for (int i = 0; i < incomings.size(); i++) {
-				Edge<V, Integer> edge = incomings.get(i);
-				for (V v : visitati) {
-					if (edge.from.equals(v)) {
-						incomings.remove(i);
-						i--;
-						break;
-					}
+				if (visitati.contains(incomings.get(i).from)) {
+					incomings.remove(i);
+					i--;
 				}
 			}
+			// Se non rimane nessun arco entrante in 'node', allora questo può far partire una nuova topologia.
 			if (incomings.empty()) {
 				senzaEntranti.append(node);
 			}
@@ -104,13 +99,8 @@ public class SimpleGraph<V> extends Graph<V, Integer> {
 		} else {
 			for (V t : senzaEntranti) {
 				List<V> tmpPath = new LList<>();
-				for (V t1 : visitati) {
-					tmpPath.append(t1);
-				}
-				List<List<V>> partialTopologies = topologie(t, tmpPath);
-				if (partialTopologies != null) {
-					totalTopologies.expand(partialTopologies);
-				}
+				tmpPath.expand(visitati);
+				totalTopologies.expand(topologie(t, tmpPath));
 			}
 		}
 		return totalTopologies;
@@ -121,7 +111,7 @@ public class SimpleGraph<V> extends Graph<V, Integer> {
 		if (exists(node)) {
 			System.out.println("Depth First Search");
 
-			List<V> explored = new LList<>();
+			HashTable<V, Boolean> explored = new HashTable<>();
 
 			Stack<Pair<V, Integer>> pila = new Stack<>();
 			pila.push(new Pair<>(node, 0));
@@ -132,11 +122,11 @@ public class SimpleGraph<V> extends Graph<V, Integer> {
 				V u = stick.first;
 				int index = stick.second;
 
-				if (!explored.contains(u)) {
+				if (!explored.hasKey(u)) {
 
 					System.out.println(" | ".repeat(index) + " " + u);
 
-					explored.append(u);
+					explored.put(u, true);
 
 					for (Edge<V, Integer> edge : outgoings(u).justReverse()) {
 						pila.push(new Pair<>(edge.to, index + 1));

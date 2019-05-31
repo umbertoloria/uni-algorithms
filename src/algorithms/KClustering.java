@@ -21,7 +21,7 @@ public class KClustering {
 		for (Edge<V, W> edge : mst) {
 			g2.link(edge);
 		}
-		return g2.partitions();
+		return g2.componentiConnesse();
 	}
 
 	private static <V, W extends Comparable<W>> int getMaxIndex(List<Edge<V, W>> mst) {

@@ -50,7 +50,7 @@ public class KClusteringTests {
 			}
 		}
 
-		for (List<XY> xies : KClustering.cluster(g, 0)) {
+		for (List<XY> xies : KClustering.cluster(g, 3)) {
 			System.out.println(xies);
 		}
 
