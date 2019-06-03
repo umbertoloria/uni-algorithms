@@ -46,6 +46,7 @@ public class AList<T> extends List<T> {
 			while (it.hasNext()) {
 				data[i++] = it.next();
 				increaseSize();
+				ensureCapacity();
 			}
 		}
 		return this;

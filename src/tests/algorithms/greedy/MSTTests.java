@@ -60,9 +60,24 @@ public class MSTTests {
 		return g;
 	}
 
+	private static UndirectGraph<Integer, Integer> test3() {
+		UndirectGraph<Integer, Integer> g = new UndirectGraph<>();
+		g.add(1);
+		g.add(2);
+		g.add(3);
+		g.add(4);
+		g.link(new Edge<>(1, 2, 3));
+		g.link(new Edge<>(1, 3, 4));
+		g.link(new Edge<>(1, 4, 5));
+		g.link(new Edge<>(2, 3, 5));
+		g.link(new Edge<>(3, 4, 7));
+		return g;
+	}
+
 	public static void main(String[] args) {
 		manage(test1(), 's');
 		manage(test2(), 1);
+		manage(test3(), 1);
 	}
 
 	private static <T> void manage(UndirectGraph<T, Integer> graph, T s) {

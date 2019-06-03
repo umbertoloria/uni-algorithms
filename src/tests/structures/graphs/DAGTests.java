@@ -81,6 +81,23 @@ public class DAGTests {
 		for (List<Character> topologia : g4.topologie()) {
 			System.out.println(topologia);
 		}
+		System.out.println();
+		SimpleGraph<Character> g5 = new SimpleGraph<>();
+		g5.add('u');
+		g5.add('v');
+		g5.add('x');
+		g5.add('y');
+		g5.add('z');
+		g5.link(new Edge<>('u', 'v'));
+		g5.link(new Edge<>('v', 'y'));
+		g5.link(new Edge<>('x', 'y'));
+		g5.link(new Edge<>('v', 'x'));
+		g5.link(new Edge<>('z', 'x'));
+		g5.link(new Edge<>('z', 'u'));
+		System.out.println("Quinto grafo (1)");
+		for (List<Character> topologia : g5.topologie()) {
+			System.out.println(topologia);
+		}
 	}
 
 }
