@@ -5,8 +5,7 @@ import structures.Stack;
 public class StackTests {
 
 	public static void main(String[] args) {
-		Stack<Integer> pila = new Stack<>();
-		pila.push(50);
+		Stack<Integer> pila = new Stack<>(50);
 		pila.push(40);
 		pila.push(30);
 		pila.push(20);

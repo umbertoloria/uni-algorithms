@@ -7,6 +7,10 @@ public class Stack<T> implements Iterable<T> {
 	private Node<T> first;
 	private int size = 0;
 
+	public Stack (T first) {
+		push(first);
+	}
+
 	public void push(T value) {
 		first = new Node<>(value, first);
 		size++;
@@ -36,6 +40,17 @@ public class Stack<T> implements Iterable<T> {
 
 	public Iterator<T> iterator() {
 		return new LinkedIterator<>(first);
+	}
+
+	public String toString() {
+		StringBuilder str = new StringBuilder("[");
+		for (T t : this) {
+			str.append(t);
+			str.append(", ");
+		}
+		str.delete(str.length() - 2, str.length());
+		str.append("]");
+		return str.toString();
 	}
 
 }

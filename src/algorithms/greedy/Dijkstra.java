@@ -28,14 +28,12 @@ public class Dijkstra {
 	/** Complexity: time O(m log n) */
 	public static <V> List<Edge<V, Integer>> shortestPath(Graph<V, Integer> g, V partenza, V destinazione) {
 
-		assert g.exists(partenza);
-		assert g.exists(destinazione);
+		assert g.contains(partenza);
+		assert g.contains(destinazione);
 
 		MinHeap<Integer, DijNode<V>> coda = new MinHeap<>();
-		for (V node : g.nodes()) {
-			if (!node.equals(partenza)) {
-				coda.insert(Integer.MAX_VALUE, new DijNode<>(node, null, null));
-			}
+		for (V node : g.nodes().except(partenza)) {
+			coda.insert(Integer.MAX_VALUE, new DijNode<>(node, null, null));
 		}
 		coda.insert(0, new DijNode<>(partenza, null, null));
 		// 'partenza' sarà il primo ad essere processato.

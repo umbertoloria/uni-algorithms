@@ -9,14 +9,6 @@ public class MSTTests {
 
 	private static UndirectGraph<Character, Integer> test1() {
 		UndirectGraph<Character, Integer> g = new UndirectGraph<>();
-		g.add('s');
-		g.add('b');
-		g.add('c');
-		g.add('d');
-		g.add('e');
-		g.add('f');
-		g.add('g');
-		g.add('h');
 		g.link(new Edge<>('s', 'b', 4));
 		g.link(new Edge<>('s', 'h', 8));
 		g.link(new Edge<>('b', 'c', 8));
@@ -34,14 +26,6 @@ public class MSTTests {
 
 	private static UndirectGraph<Integer, Integer> test2() {
 		UndirectGraph<Integer, Integer> g = new UndirectGraph<>();
-		g.add(8);
-		g.add(7);
-		g.add(6);
-		g.add(5);
-		g.add(4);
-		g.add(3);
-		g.add(2);
-		g.add(1);
 		g.link(new Edge<>(1, 2, 9));
 		g.link(new Edge<>(1, 7, 15));
 		g.link(new Edge<>(1, 6, 14));
@@ -62,10 +46,6 @@ public class MSTTests {
 
 	private static UndirectGraph<Integer, Integer> test3() {
 		UndirectGraph<Integer, Integer> g = new UndirectGraph<>();
-		g.add(1);
-		g.add(2);
-		g.add(3);
-		g.add(4);
 		g.link(new Edge<>(1, 2, 3));
 		g.link(new Edge<>(1, 3, 4));
 		g.link(new Edge<>(1, 4, 5));
@@ -74,30 +54,33 @@ public class MSTTests {
 		return g;
 	}
 
+	private static UndirectGraph<Integer, Integer> test4() {
+		UndirectGraph<Integer, Integer> g = new UndirectGraph<>();
+		g.link(new Edge<>(1, 2, 5));
+		g.link(new Edge<>(1, 5, 3));
+		g.link(new Edge<>(2, 3, 1));
+		g.link(new Edge<>(2, 4, 9));
+		g.link(new Edge<>(2, 6, 7));
+		g.link(new Edge<>(3, 5, 6));
+		g.link(new Edge<>(4, 2, 9));
+		g.link(new Edge<>(4, 5, 2));
+		g.link(new Edge<>(5, 6, 8));
+		return g;
+	}
+
 	public static void main(String[] args) {
 		manage(test1(), 's');
 		manage(test2(), 1);
 		manage(test3(), 1);
+		manage(test4(), 1);
 	}
 
 	private static <T> void manage(UndirectGraph<T, Integer> graph, T s) {
-		int weight = 0;
 		System.out.println("Algoritmo di Prim");
-		for (Edge<T, Integer> edge : Prim.mst(graph, s)) {
-			System.out.println(edge);
-			weight += edge.weight;
-		}
-		System.out.println("Final weight: " + weight);
-		System.out.println();
-		weight = 0;
-		System.out.println("Algoritmo di Kruskal");
-		for (Edge<T, Integer> edge : Kruskal.mst(graph)) {
-			System.out.println(edge);
-			weight += edge.weight;
-		}
-		System.out.println("Final weight: " + weight);
-		System.out.println();
-		System.out.println();
+		Prim.mst(graph, s).show();
+		System.out.println("\nAlgoritmo di Kruskal");
+		Kruskal.mst(graph).show();
+		System.out.println("\n");
 	}
 
 }

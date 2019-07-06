@@ -26,23 +26,21 @@ public class Prim {
 	}
 
 	/** Complexity: time O(m log n) */
-	public static <V> List<Edge<V, Integer>> mst(UndirectGraph<V, Integer> g, V s) {
-		assert g.exists(s);
+	public static <V> AlberoRadicato<V, Integer> mst(UndirectGraph<V, Integer> g, V s) {
+		assert g.contains(s);
 
 		MinHeap<Integer, PrimNode<V>> coda = new MinHeap<>();
-		for (V node : g.nodes()) {
-			if (!node.equals(s)) {
-				coda.insert(Integer.MAX_VALUE, new PrimNode<>(node, null, null));
-			}
+		for (V node : g.nodes().except(s)) {
+			coda.insert(Integer.MAX_VALUE, new PrimNode<>(node, null, null));
 		}
 		coda.insert(0, new PrimNode<>(s, null, null));
-		// 'partenza' sarà il primo ad essere processato.
 
 		// Explored conterrà i nodi già processati.
 		List<V> explored = new LList<>();
 
 		// MST conterrà tutti gli archi del Minimum Spanning Tree.
-		List<Edge<V, Integer>> mst = new AList<>();
+		AlberoRadicato<V, Integer> mst = new AlberoRadicato<>();
+		mst.addRoot(s);
 
 		// Processiamo ogni volta il nodo più vicino.
 		while (!coda.empty()) {
@@ -62,7 +60,7 @@ public class Prim {
 				}
 			}
 			if (pu.previous != null) {
-				mst.append(new Edge<>(pu.previous, u, pu.distancePrevNode));
+				mst.addChild(pu.previous, u, pu.distancePrevNode);
 			}
 		}
 		return mst;

@@ -22,16 +22,15 @@ public final class Edge<V, W extends Comparable<W>> implements Comparable<Edge<V
 		return weight.compareTo(o.weight);
 	}
 
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Edge<?, ?> edge = (Edge<?, ?>) o;
+		return from.equals(edge.from) && to.equals(edge.to);
+	}
+
 	public String toString() {
-		if (weight == null) {
-			return String.format("%-2s -----------> %2s", from, to);
-		} else {
-			String we = (weight + "");
-			if (we.length() > 3) {
-				we = we.substring(0, 3);
-			}
-			return String.format("%-2s ---( %-3s)--> %2s", from, we, to);
-		}
+		return "(" + from + ", " + to + (weight == null ? "" : ", w=" + weight) + ")";
 	}
 
 }

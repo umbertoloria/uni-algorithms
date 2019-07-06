@@ -8,13 +8,6 @@ public class DAGTests {
 
 	public static void main(String[] args) {
 		SimpleGraph<Integer> g1 = new SimpleGraph<>();
-		g1.add(1);
-		g1.add(2);
-		g1.add(3);
-		g1.add(4);
-		g1.add(5);
-		g1.add(6);
-		g1.add(7);
 		g1.link(new Edge<>(1, 4));
 		g1.link(new Edge<>(1, 5));
 		g1.link(new Edge<>(1, 7));
@@ -33,11 +26,6 @@ public class DAGTests {
 		}
 		System.out.println();
 		SimpleGraph<Character> g2 = new SimpleGraph<>();
-		g2.add('a');
-		g2.add('b');
-		g2.add('c');
-		g2.add('e');
-		g2.add('d');
 		g2.link(new Edge<>('a', 'b'));
 		g2.link(new Edge<>('a', 'c'));
 		g2.link(new Edge<>('c', 'd'));
@@ -49,11 +37,6 @@ public class DAGTests {
 		}
 		System.out.println();
 		SimpleGraph<Character> g3 = new SimpleGraph<>();
-		g3.add('b');
-		g3.add('a');
-		g3.add('c');
-		g3.add('d');
-		g3.add('e');
 		g3.link(new Edge<>('a', 'c'));
 		g3.link(new Edge<>('a', 'b'));
 		g3.link(new Edge<>('b', 'e'));
@@ -65,12 +48,6 @@ public class DAGTests {
 		}
 		System.out.println();
 		SimpleGraph<Character> g4 = new SimpleGraph<>();
-		g4.add('a');
-		g4.add('b');
-		g4.add('c');
-		g4.add('d');
-		g4.add('e');
-		g4.add('f');
 		g4.link(new Edge<>('a', 'b'));
 		g4.link(new Edge<>('a', 'd'));
 		g4.link(new Edge<>('b', 'c'));
@@ -83,11 +60,6 @@ public class DAGTests {
 		}
 		System.out.println();
 		SimpleGraph<Character> g5 = new SimpleGraph<>();
-		g5.add('u');
-		g5.add('v');
-		g5.add('x');
-		g5.add('y');
-		g5.add('z');
 		g5.link(new Edge<>('u', 'v'));
 		g5.link(new Edge<>('v', 'y'));
 		g5.link(new Edge<>('x', 'y'));

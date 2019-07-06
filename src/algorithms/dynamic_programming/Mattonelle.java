@@ -27,9 +27,7 @@ public class Mattonelle {
 		lengths.add(length);
 	}
 
-	/**
-	 Qual è il numero minimo di mattonelle di lunghezza data per coprire una lunghezza complessiva n?
-	 */
+	/** Qual è il numero minimo di mattonelle di lunghezza data per coprire una lunghezza complessiva n? */
 	public int copri(int n) {
 		int[] m = new int[n + 1];
 		m[0] = 0;

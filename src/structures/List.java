@@ -42,10 +42,7 @@ public abstract class List<T> implements Iterable<T> {
 	public List<T> exclude(List<T> external) {
 		if (!external.empty()) {
 			for (T del : external) {
-				int index = indexOf(del);
-				if (index >= 0) {
-					remove(index);
-				}
+				except(del);
 			}
 		}
 		return this;
@@ -66,6 +63,14 @@ public abstract class List<T> implements Iterable<T> {
 	}
 
 	public abstract int indexOf(T value);
+
+	public List<T> except(T to) {
+		int index = indexOf(to);
+		if (index >= 0) {
+			remove(index);
+		}
+		return this;
+	}
 
 	// Utils
 

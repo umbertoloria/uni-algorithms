@@ -4,12 +4,12 @@ public class DirectGraph<V, W extends Comparable<W>> extends Graph<V, W> {
 
 	private HashTable<V, LList<Edge<V, W>>> edges = new HashTable<>();
 
-	public boolean exists(V node) {
+	public boolean contains(V node) {
 		return edges.hasKey(node);
 	}
 
 	public void add(V node) {
-		if (!exists(node)) {
+		if (!contains(node)) {
 			edges.put(node, new LList<>());
 		}
 	}
@@ -28,26 +28,23 @@ public class DirectGraph<V, W extends Comparable<W>> extends Graph<V, W> {
 		return res;
 	}
 
-	public boolean link(Edge<V, W> edge) {
-		if (exists(edge.from) && exists(edge.to)) {
-			LList<Edge<V, W>> adjs = edges.get(edge.from);
-			int i = 0;
-			while (i < adjs.size() && !adjs.get(i).to.equals(edge.to)) {
-				i++;
-			}
-			if (i < adjs.size()) {
-				adjs.remove(i);
-			}
-			adjs.append(edge);
-			return true;
-		} else {
-			return false;
+	public void link(Edge<V, W> edge) {
+		add(edge.from);
+		add(edge.to);
+		LList<Edge<V, W>> adjs = edges.get(edge.from);
+		int i = 0;
+		while (i < adjs.size() && !adjs.get(i).to.equals(edge.to)) {
+			i++;
 		}
+		if (i < adjs.size()) {
+			adjs.remove(i);
+		}
+		adjs.append(edge);
 	}
 
 	public List<Edge<V, W>> outgoings(V from) {
 		List<Edge<V, W>> result = new LList<>();
-		if (exists(from)) {
+		if (contains(from)) {
 			result.expand(edges.get(from));
 		}
 		return result;

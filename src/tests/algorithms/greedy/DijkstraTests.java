@@ -10,14 +10,6 @@ public class DijkstraTests {
 
 	public static DirectGraph<Integer, Integer> test1() {
 		DirectGraph<Integer, Integer> g = new DirectGraph<>();
-		g.add(1);
-		g.add(2);
-		g.add(3);
-		g.add(5);
-		g.add(4);
-		g.add(6);
-		g.add(7);
-		g.add(8);
 		g.link(new Edge<>(1, 2, 9));
 		g.link(new Edge<>(1, 6, 14));
 		g.link(new Edge<>(1, 7, 15));
@@ -38,18 +30,6 @@ public class DijkstraTests {
 
 	public static UndirectGraph<Character, Integer> test2() {
 		UndirectGraph<Character, Integer> g = new UndirectGraph<>();
-		g.add('S');
-		g.add('A');
-		g.add('B');
-		g.add('D');
-		g.add('G');
-		g.add('H');
-		g.add('F');
-		g.add('E');
-		g.add('L');
-		g.add('J');
-		g.add('I');
-		g.add('C');
 		g.link(new Edge<>('S', 'A', 7));
 		g.link(new Edge<>('S', 'B', 1));
 		g.link(new Edge<>('A', 'B', 3));

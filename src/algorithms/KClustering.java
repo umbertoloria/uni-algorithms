@@ -7,21 +7,21 @@ import structures.UndirectGraph;
 
 public class KClustering {
 
-	public static <V, W extends Comparable<W>> List<List<V>> cluster(UndirectGraph<V, W> graph, int k) {
-		assert 1 <= k && k <= graph.nodes().size();
-		List<Edge<V, W>> mst = Kruskal.mst(graph);
+	public static <V, W extends Comparable<W>> List<UndirectGraph<V, W>> cluster(UndirectGraph<V, W> graph, int k) {
+		assert k > 0 && k <= graph.nodes().size();
+		List<Edge<V, W>> mst = Kruskal.mst(graph).edges();
 		while (k > 1) {
 			mst.remove(getMaxIndex(mst));
 			k--;
 		}
-		UndirectGraph<V, W> g2 = new UndirectGraph<>();
+		UndirectGraph<V, W> result = new UndirectGraph<>();
 		for (V node : graph.nodes()) {
-			g2.add(node);
+			result.add(node);
 		}
 		for (Edge<V, W> edge : mst) {
-			g2.link(edge);
+			result.link(edge);
 		}
-		return g2.componentiConnesse();
+		return result.componentiConnesse();
 	}
 
 	private static <V, W extends Comparable<W>> int getMaxIndex(List<Edge<V, W>> mst) {

@@ -2,7 +2,6 @@ package tests.algorithms;
 
 import algorithms.KClustering;
 import structures.Edge;
-import structures.List;
 import structures.UndirectGraph;
 
 public class KClusteringTests {
@@ -50,8 +49,12 @@ public class KClusteringTests {
 			}
 		}
 
-		for (List<XY> xies : KClustering.cluster(g, 3)) {
-			System.out.println(xies);
+		int i = 1;
+		for (UndirectGraph<XY, Double> comp : KClustering.cluster(g, 3)) {
+			System.out.println("CLUSTER " + i++);
+			for (XY node : comp.nodes()) {
+				System.out.println(node);
+			}
 		}
 
 	}

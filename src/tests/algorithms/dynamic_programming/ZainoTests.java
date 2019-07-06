@@ -32,6 +32,21 @@ public class ZainoTests {
 		for (Oggetto oggetto : oggetti) {
 			System.out.println(oggetto.name + " di valore " + oggetto.value + " e di peso " + oggetto.weight);
 		}
+		System.out.println();
+
+		Zaino z3 = new Zaino();
+		z3.add(new Oggetto("1", 1, 1));
+		z3.add(new Oggetto("2", 4, 3));
+		z3.add(new Oggetto("3", 5, 4));
+		z3.add(new Oggetto("4", 7, 2));
+		z3.add(new Oggetto("5", 3, 5));
+		z3.add(new Oggetto("6", 4, 2));
+		System.out.println("Valore massimo: " + z3.ruba(8));
+		oggetti = z3.analisi();
+		z3.printTable();
+		for (Oggetto oggetto : oggetti) {
+			System.out.println(oggetto.name + " di valore " + oggetto.value + " e di peso " + oggetto.weight);
+		}
 	}
 
 }

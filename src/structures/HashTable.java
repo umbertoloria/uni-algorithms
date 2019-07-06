@@ -80,9 +80,13 @@ public class HashTable<K, V> {
 	}
 
 	public boolean hasKey(K key) {
-		HashRow<K, V> sublist = data[hash(key)];
-		if (sublist != null) {
-			return sublist.hasKey(key);
+		if (key != null) {
+			HashRow<K, V> sublist = data[hash(key)];
+			if (sublist != null) {
+				return sublist.hasKey(key);
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}

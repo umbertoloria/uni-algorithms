@@ -10,12 +10,6 @@ public class BellmanFordTests {
 
 	private static DirectGraph<Character, Integer> test3() {
 		DirectGraph<Character, Integer> g = new DirectGraph<>();
-		g.add('a');
-		g.add('b');
-		g.add('c');
-		g.add('d');
-		g.add('e');
-		g.add('t');
 		g.link(new Edge<>('a', 'b', -4));
 		g.link(new Edge<>('a', 't', -3));
 		g.link(new Edge<>('b', 'd', -1));

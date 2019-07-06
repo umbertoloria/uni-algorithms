@@ -25,7 +25,7 @@ public class Lago {
 		viaggi.append(viaggio);
 	}
 
-	private List<Viaggio> incoming(int approdo) {
+	private List<Viaggio> incomings(int approdo) {
 		List<Viaggio> res = new LList<>();
 		for (Viaggio viaggio : viaggi) {
 			if (viaggio.destinazione == approdo) {
@@ -40,7 +40,7 @@ public class Lago {
 		m[0] = 0;
 		for (int i = 1; i <= n; i++) {
 			int min = 0;
-			for (Viaggio viaggio : incoming(i)) {
+			for (Viaggio viaggio : incomings(i)) {
 				int contributo = viaggio.prezzo + m[viaggio.partenza];
 				if (min == 0 || min > contributo) {
 					min = contributo;
